@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/bottom_information"
+            android:icon="@drawable/ic_info_selected"
+            android:title="@string/information">
+        </item>
+
+        <item
+            android:id="@+id/bottom_square"
+            android:icon="@drawable/ic_square"
+            android:title="@string/square">
+        </item>
+
+        <item
+            android:id="@+id/bottom_mall"
+            android:icon="@drawable/ic_mall"
+            android:title="@string/mall">
+        </item>
+
+        <item
+            android:id="@+id/bottom_person"
+            android:icon="@mipmap/ic_launcher"
+            android:title="个人">
+        </item>
+    </group>
+</menu>

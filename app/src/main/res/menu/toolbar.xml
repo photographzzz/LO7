@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--
+        always 表示永远显示在Toolbar中，如果屏幕空间不够则不显示
+        ifRoom 表示屏幕空间足够的情况下显示在Toolbar中，不够的话就显示在菜单中
+        never 表示永远显示在菜单中
+        Toolbar中的action按钮只会显示图标，菜单中的action按钮只会显示文字
+     -->
+
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        app:showAsAction="never" />
+
+</menu>

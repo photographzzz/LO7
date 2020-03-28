@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">LO7</string>
+    <string name="host">http://10.0.2.2:8083/</string>
+    <string name="main_title">L O 7</string>
+    <string name="hint_username">用户名</string>
+    <string name="hint_password">密码</string>
+    <string name="hint_gender">性别</string>
+    <string name="hint_email">邮箱</string>
+    <string name="hint_phone">电话</string>
+    <string name="hint_login">去登录</string>
+    <string name="hint_register">注 册</string>
+    <string name="hint_login2">登 陆</string>
+    <string name="hint_register2">没有账号？现在注册</string>
+    <string name="mall">商城</string>
+    <string name="square">广场</string>
+    <string name="information">资讯</string>
+    <string name="hint_bio">签名</string>
+</resources>
