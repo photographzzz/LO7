@@ -1,4 +1,4 @@
-package com.photograph.lo7.fragments.home.information_content;
+package com.photograph.lo7.bottomnavigationbar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,19 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.photograph.lo7.R;
 
-public class PlayingInformationFragment extends Fragment {
-
+public class BottomNavigationBarPersonFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(inflater.getContext(), R.layout.fragment_information_playing, null);
+        return inflater.inflate(R.layout.fragment_person, container, false);
 
-        return view;
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
 }

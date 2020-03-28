@@ -3,7 +3,7 @@
     <!-- group好像没啥用 -->
     <group android:checkableBehavior="single"  android:id="@+id/first_group">  <!-- 表示只能单选 -->
         <item
-            android:id="@+id/nav_moment"
+            android:id="@+id/drawerLayoutUpdateUserInfoFragment"
             android:icon="@drawable/nav_moment"
             android:title="我的动态" />
 

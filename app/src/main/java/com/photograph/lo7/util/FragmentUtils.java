@@ -7,10 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.photograph.lo7.fragments.LoginFragment;
 import com.photograph.lo7.fragments.RegisterFragment;
-import com.photograph.lo7.fragments.home.InformationFragment;
-import com.photograph.lo7.fragments.home.MallFragment;
-import com.photograph.lo7.fragments.home.PersonFragment;
-import com.photograph.lo7.fragments.home.SquareFragment;
+import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarInformationFragment;
+import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarMallFragment;
+import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarPersonFragment;
+import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarSquareFragment;
 
 public class FragmentUtils {
     public static AppCompatActivity context;
@@ -42,13 +42,13 @@ public class FragmentUtils {
             } else if (fragmentTag.equals(REGISTER_FRAGMENT_TAG)) {
                 fragment = new RegisterFragment();
             } else if (fragmentTag.equals(INFORMATION_FRAGMENT_TAG)) {
-                fragment = new InformationFragment();
+                fragment = new BottomNavigationBarInformationFragment();
             } else if (fragmentTag.equals(SQUARE_FRAGMENT_TAG)) {
-                fragment = new SquareFragment();
+                fragment = new BottomNavigationBarSquareFragment();
             } else if (fragmentTag.equals(MALL_FRAGMENT_TAG)) {
-                fragment = new MallFragment();
+                fragment = new BottomNavigationBarMallFragment();
             } else if (fragmentTag.equals(PERSON_FRAGMENT_TAG)) {
-                fragment = new PersonFragment();
+                fragment = new BottomNavigationBarPersonFragment();
             }
 
         }

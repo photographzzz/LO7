@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.UpdateUserInfoActivity"></activity>
+        <activity android:name=".activities.UpdateUserInfoFragment"></activity>
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />

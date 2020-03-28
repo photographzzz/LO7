@@ -1,4 +1,4 @@
-package com.photograph.lo7.fragments.home;
+package com.photograph.lo7.bottomnavigationbar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,9 +13,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.photograph.lo7.R;
+import com.photograph.lo7.bottomnavigationbar.informationcontent.InformationFragmentViewPager;
 import com.photograph.lo7.databinding.FragmentInformationBinding;
 
-public class InformationFragment extends Fragment {
+public class BottomNavigationBarInformationFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -33,12 +34,12 @@ public class InformationFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText(titles[1]));
         tabLayout.addTab(tabLayout.newTab().setText(titles[2]));
         tabLayout.addTab(tabLayout.newTab().setText(titles[3]));
-//        InformationFragmentViewPager informationFragmentViewPager = new InformationFragmentViewPager(FragmentUtils.context.getSupportFragmentManager(), titles);
-//        viewPager.setAdapter(informationFragmentViewPager);
-//
-//
-//        //表示将TabLayout 和Viewpager 进行关联
-//        tabLayout.setupWithViewPager(viewPager);
+        InformationFragmentViewPager informationFragmentViewPager = new InformationFragmentViewPager(getActivity().getSupportFragmentManager(), titles);
+        viewPager.setAdapter(informationFragmentViewPager);
+
+
+        //表示将TabLayout 和Viewpager 进行关联
+        tabLayout.setupWithViewPager(viewPager);
 
         return fragmentInformationBinding.getRoot();
     }

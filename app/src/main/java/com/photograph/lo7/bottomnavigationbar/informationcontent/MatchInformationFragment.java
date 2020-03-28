@@ -1,4 +1,4 @@
-package com.photograph.lo7.fragments.home;
+package com.photograph.lo7.bottomnavigationbar.informationcontent;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,11 +11,19 @@ import androidx.fragment.app.Fragment;
 
 import com.photograph.lo7.R;
 
-public class SquareFragment extends Fragment {
+public class MatchInformationFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_square, container, false);
+        View view = View.inflate(inflater.getContext(), R.layout.fragment_information_match, null);
 
+        return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
 }

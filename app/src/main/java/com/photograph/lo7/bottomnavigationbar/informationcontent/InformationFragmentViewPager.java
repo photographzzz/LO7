@@ -1,4 +1,4 @@
-package com.photograph.lo7.fragments.home.information_content;
+package com.photograph.lo7.bottomnavigationbar.informationcontent;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

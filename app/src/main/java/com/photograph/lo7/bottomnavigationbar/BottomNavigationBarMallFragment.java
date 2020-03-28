@@ -1,4 +1,4 @@
-package com.photograph.lo7.fragments.home;
+package com.photograph.lo7.bottomnavigationbar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.photograph.lo7.R;
 
-public class MallFragment extends Fragment {
+public class BottomNavigationBarMallFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
