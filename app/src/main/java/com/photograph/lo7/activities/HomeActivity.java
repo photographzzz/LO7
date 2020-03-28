@@ -3,16 +3,21 @@ package com.photograph.lo7.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,17 +27,12 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.base.BaseActivity;
 import com.photograph.lo7.databinding.ActivityHomeBinding;
 import com.photograph.lo7.databinding.NavigationHeaderBinding;
-import com.photograph.lo7.httpsender.OnError;
-import com.photograph.lo7.httpsender.entity.Response;
-import com.photograph.lo7.util.FragmentUtils;
 import com.photograph.lo7.vo.UserVO;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import rxhttp.wrapper.param.RxHttp;
 
-public class HomeActivity extends BaseActivity<ActivityHomeBinding> implements BottomNavigationView.OnNavigationItemSelectedListener,  View.OnClickListener {
+public class HomeActivity extends BaseActivity<ActivityHomeBinding> implements View.OnClickListener {
     private DrawerLayout drawerLayout;
-    private Menu menu;
     private UserVO userVO = AppHolder.currentUser;
     private CircleImageView circleImageView;
     private ActivityHomeBinding homeBinding;
@@ -41,24 +41,28 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding> implements B
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        menu = homeBinding.homeBottomNavigation.getMenu();
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        //navController.addOnDestinationChangedListener((controller, destination, arguments) -> Toast.makeText(HomeActivity.this, "onDestinationChanged() called", Toast.LENGTH_SHORT).show());
+        //设置底部菜单
+        BottomNavigationView bottomNavigationView = findViewById(R.id.home_bottom_navigation);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+
 
         drawerLayout = homeBinding.homeDrawerLayout;
-        homeBinding.homeBottomNavigation.setItemIconTintList(null);
-        homeBinding.homeBottomNavigation.setOnNavigationItemSelectedListener(this);
-
+        //homeBinding.homeBottomNavigation.setItemIconTintList(null);
 
         NavigationView navigationView = homeBinding.homeNavigationView;
 //        navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         header.findViewById(R.id.navigation_user_info).setOnClickListener(this);
         NavigationHeaderBinding navHeaderBinding = DataBindingUtil.bind(header);
-        navHeaderBinding.setUser(userVO);
+        //navHeaderBinding.setUser(userVO);
         circleImageView = header.findViewById(R.id.navigation_pic);
-        loadUserPic();
+        //loadUserPic();
 
 
-        FragmentUtils.attachFragment(this, FragmentUtils.INFORMATION_FRAGMENT_TAG, R.id.home_content);
     }
 
   /*
@@ -104,28 +108,9 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding> implements B
     }
 
 
-    @Override
+   /*@Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.bottom_information:
-                restMenuItemToDefaultIcon();
-                item.setIcon(R.drawable.ic_info_selected);
-                FragmentUtils.attachFragment(HomeActivity.this, FragmentUtils.INFORMATION_FRAGMENT_TAG, R.id.home_content);
-                break;
-            case R.id.bottom_square:
-                restMenuItemToDefaultIcon();
-                item.setIcon(R.drawable.ic_square_selected);
-                FragmentUtils.attachFragment(HomeActivity.this, FragmentUtils.SQUARE_FRAGMENT_TAG, R.id.home_content);
-                break;
-            case R.id.bottom_mall:
-                restMenuItemToDefaultIcon();
-                item.setIcon(R.drawable.ic_mall_selected);
-                FragmentUtils.attachFragment(HomeActivity.this, FragmentUtils.MALL_FRAGMENT_TAG, R.id.home_content);
-                break;
-            case R.id.bottom_person:
-                restMenuItemToDefaultIcon();
-                FragmentUtils.attachFragment(HomeActivity.this, FragmentUtils.PERSON_FRAGMENT_TAG, R.id.home_content);
-                break;
             case R.id.nav_exit:
                 RxHttp.get("user/exit")
                         .asResponse(Response.class)
@@ -139,13 +124,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding> implements B
 
 
         return true;
-    }
-
-    private void restMenuItemToDefaultIcon() {
-        menu.findItem(R.id.bottom_information).setIcon(R.drawable.ic_info);
-        menu.findItem(R.id.bottom_square).setIcon(R.drawable.ic_square);
-        menu.findItem(R.id.bottom_mall).setIcon(R.drawable.ic_mall);
-    }
+    }*/
 
 
     private void loadUserPic() {

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/bottomNavigationBarInformationFragment"
+            android:icon="@drawable/ic_info"
+            android:title="@string/information" />
+
+        <item
+            android:id="@+id/bottomNavigationBarSquareFragment"
+            android:icon="@drawable/ic_square"
+            android:title="@string/square" />
+
+        <item
+            android:id="@+id/bottomNavigationBarMallFragment"
+            android:icon="@drawable/ic_mall"
+            android:title="@string/mall" />
+
+        <item
+            android:id="@+id/bottomNavigationBarPersonFragment"
+            android:icon="@mipmap/ic_launcher"
+            android:title="个人" />
+    </group>
+</menu>

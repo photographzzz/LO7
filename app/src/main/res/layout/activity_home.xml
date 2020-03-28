@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-    </data>
+    <data></data>
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/home_drawer_layout"
@@ -17,22 +16,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/toolbar_layout">
-            </include>
-
+            <include layout="@layout/toolbar_layout"></include>
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <LinearLayout
-                    android:id="@+id/home_content"
+                <fragment
+                    android:id="@+id/nav_host_fragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
+                    android:layout_height="match_parent"
+                    app:defaultNavHost="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navGraph="@navigation/graph_bottom_navigation_bar_activity" />
+
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/home_bottom_navigation"
@@ -44,7 +47,7 @@
                     app:itemIconTint="@drawable/selector_bottom_nav"
                     app:itemTextColor="@drawable/selector_bottom_nav"
                     app:labelVisibilityMode="labeled"
-                    app:menu="@menu/home_menu" />
+                    app:menu="@menu/menu_bottom" />
             </RelativeLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

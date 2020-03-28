@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/graph_bottom_navigation_bar_activity"
+    app:startDestination="@id/bottomNavigationBarInformationFragment">
+
+    <fragment
+        android:id="@+id/bottomNavigationBarInformationFragment"
+        android:name="com.photograph.lo7.fragments.home.InformationFragment"
+        android:label="BottomNavigationBarMainFragment"/>
+    <fragment
+        android:id="@+id/bottomNavigationBarSquareFragment"
+        android:name="com.photograph.lo7.fragments.home.SquareFragment"
+        android:label="BottomNavigationBarBroadcastFragment"/>
+    <fragment
+        android:id="@+id/bottomNavigationBarMallFragment"
+        android:name="com.photograph.lo7.fragments.home.MallFragment"
+        android:label="BottomNavigationBarSettingsFragment"/>
+
+    <fragment
+        android:id="@+id/bottomNavigationBarPersonFragment"
+        android:name="com.photograph.lo7.fragments.home.PersonFragment"
+        android:label="BottomNavigationBarSettingsFragment"/>
+
+
+</navigation>
