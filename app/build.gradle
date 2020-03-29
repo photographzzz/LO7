@@ -47,9 +47,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation 'com.github.SheHuan:NiceImageView:1.0.5'
+
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
-
+/*    implementation "androidx.navigation:navigation-fragment:2.3.0-alpha02"
+    implementation "androidx.navigation:navigation-ui:2.3.0-alpha02"*/
 
     implementation 'com.rxjava.rxhttp:rxhttp:2.1.0' //必须
     annotationProcessor 'com.rxjava.rxhttp:rxhttp-compiler:2.1.0' //注解处理器，生成RxHttp类,必须

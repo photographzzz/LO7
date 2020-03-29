@@ -6,10 +6,14 @@ import android.content.Context;
 import com.photograph.lo7.httpsender.RxHttpManager;
 import com.photograph.lo7.vo.UserVO;
 
+/**
+ * 自定义Application
+ */
 public class AppHolder extends Application {
 
     private static AppHolder instance;
     public static UserVO currentUser;
+
 
 
     public static AppHolder getInstance() {

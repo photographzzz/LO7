@@ -1,34 +1,34 @@
 package com.photograph.lo7.vo;
 
 
+import android.net.Uri;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.Observable;
 
+import com.bumptech.glide.Glide;
 import com.photograph.lo7.BR;
+import com.photograph.lo7.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserVO extends BaseObservable {
     private Integer id;
     private String username;
-    @Bindable
     private Integer gender;
-    @Bindable
     private String email;
-    @Bindable
     private String phone;
-    @Bindable
     private String pic;
-    @Bindable
     private String bio;
-    @Bindable
     private Integer level;
-    @Bindable
     private Integer exp;
-    @Bindable
     private Integer coins;
-    @Bindable
     private Integer followCount;
-    @Bindable
     private Integer followerCount;
+    private Integer role;
+
 
     public Integer getId() {
         return id;
@@ -46,6 +46,7 @@ public class UserVO extends BaseObservable {
         this.username = username;
     }
 
+    @Bindable
     public Integer getGender() {
         return gender;
     }
@@ -55,6 +56,7 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.gender);
     }
 
+    @Bindable
     public String getEmail() {
         return email;
     }
@@ -64,6 +66,7 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.email);
     }
 
+    @Bindable
     public String getPhone() {
         return phone;
     }
@@ -73,6 +76,7 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.phone);
     }
 
+    @Bindable
     public String getPic() {
         return pic;
     }
@@ -81,6 +85,7 @@ public class UserVO extends BaseObservable {
         this.pic = pic;
     }
 
+    @Bindable
     public String getBio() {
         return bio;
     }
@@ -90,6 +95,7 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.bio);
     }
 
+    @Bindable
     public Integer getLevel() {
         return level;
     }
@@ -99,6 +105,7 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.level);
     }
 
+    @Bindable
     public Integer getExp() {
         return exp;
     }
@@ -108,6 +115,7 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.exp);
     }
 
+    @Bindable
     public Integer getCoins() {
         return coins;
     }
@@ -115,8 +123,14 @@ public class UserVO extends BaseObservable {
     public void setCoins(Integer coins) {
         this.coins = coins;
         notifyPropertyChanged(BR.coins);
+        addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+            }
+        });
     }
 
+    @Bindable
     public Integer getFollowCount() {
         return followCount;
     }
@@ -126,12 +140,33 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.followCount);
     }
 
+    @Bindable
     public Integer getFollowerCount() {
         return followerCount;
     }
+
 
     public void setFollowerCount(Integer followerCount) {
         this.followerCount = followerCount;
         notifyPropertyChanged(BR.followerCount);
     }
+
+    @Bindable
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+        notifyPropertyChanged(BR.role);
+    }
+
+    // 与HomeActivity的侧拉导航栏头部CircleImageView保持绑定，当用户pic字段变化时，自动刷新头像
+    @BindingAdapter({"url"})
+    public static void loadImage(CircleImageView view, String src) {
+       Glide.with(view.getContext()).load(Uri.parse(src.replace("image.LO7.com", "192.168.0.102")))
+                .placeholder(R.mipmap.ic_launcher).into(view);
+    }
+
+
 }

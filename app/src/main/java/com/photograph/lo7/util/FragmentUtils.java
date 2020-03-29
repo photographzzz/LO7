@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.photograph.lo7.fragments.LoginFragment;
-import com.photograph.lo7.fragments.RegisterFragment;
-import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarInformationFragment;
-import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarMallFragment;
-import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarPersonFragment;
-import com.photograph.lo7.bottomnavigationbar.BottomNavigationBarSquareFragment;
+import com.photograph.lo7.ui.fragments.LoginFragment;
+import com.photograph.lo7.ui.fragments.RegisterFragment;
+import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarInformationFragment;
+import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarMallFragment;
+import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarPersonFragment;
+import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarSquareFragment;
 
 public class FragmentUtils {
     public static AppCompatActivity context;

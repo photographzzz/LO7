@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="info">
+        <attr name="mHint" format="string" />
+        <attr name="mInfo" format="string" />
+        <attr name="mPic" format="string" />
+
+    </declare-styleable>
+
+
+</resources>

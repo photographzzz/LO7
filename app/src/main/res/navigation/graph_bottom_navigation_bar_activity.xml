@@ -6,20 +6,20 @@
 
     <fragment
         android:id="@+id/bottomNavigationBarInformationFragment"
-        android:name="com.photograph.lo7.bottomnavigationbar.BottomNavigationBarInformationFragment"
+        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarInformationFragment"
         android:label="BottomNavigationBarMainFragment"/>
     <fragment
         android:id="@+id/bottomNavigationBarSquareFragment"
-        android:name="com.photograph.lo7.bottomnavigationbar.BottomNavigationBarSquareFragment"
+        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarSquareFragment"
         android:label="BottomNavigationBarBroadcastFragment"/>
     <fragment
         android:id="@+id/bottomNavigationBarMallFragment"
-        android:name="com.photograph.lo7.bottomnavigationbar.BottomNavigationBarMallFragment"
+        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarMallFragment"
         android:label="BottomNavigationBarSettingsFragment"/>
 
     <fragment
         android:id="@+id/bottomNavigationBarPersonFragment"
-        android:name="com.photograph.lo7.bottomnavigationbar.BottomNavigationBarPersonFragment"
+        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarPersonFragment"
         android:label="BottomNavigationBarSettingsFragment"/>
 
 

@@ -3,38 +3,37 @@
     <!-- group好像没啥用 -->
     <group android:checkableBehavior="single"  android:id="@+id/first_group">  <!-- 表示只能单选 -->
         <item
-            android:id="@+id/drawerLayoutUpdateUserInfoFragment"
+            android:id="@+id/drawerLayoutMomentFragment"
             android:icon="@drawable/nav_moment"
             android:title="我的动态" />
 
-
         <item
-            android:id="@+id/nav_article"
+            android:id="@+id/drawerLayoutArticleFragment"
             android:icon="@drawable/nav_article"
             android:title="我的文章" />
         <item
-            android:id="@+id/nav_video"
+            android:id="@+id/drawerLayoutVideoFragment"
             android:icon="@drawable/nav_video"
             android:title="我的视频" />
         <item
-            android:id="@+id/nav_star"
+            android:id="@+id/drawerLayoutStarFragment"
             android:icon="@drawable/nav_star"
             android:title="我的收藏" />
 
         <item
-            android:id="@+id/nav_download"
+            android:id="@+id/drawerLayoutDownloadFragment"
             android:icon="@drawable/nav_download"
             android:title="我的下载" />
     </group>
 
     <group android:checkableBehavior="single" android:id="@+id/second_group">
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/drawerLayoutSettingsFragment"
             android:icon="@drawable/nav_article"
             android:title="设置" />
 
         <item
-            android:id="@+id/nav_exit"
+            android:id="@+id/drawerLayoutExit"
             android:icon="@drawable/nav_article"
             android:title="退出" />
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_graph"
+    app:startDestination="@id/bottomNavigationViewFragment">
+
+    <fragment
+        android:id="@+id/bottomNavigationViewFragment"
+        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationViewFragment"
+        tools:layout="@layout/activity_bottom_nav" />
+
+    <fragment
+        android:id="@+id/drawerLayoutMomentFragment"
+        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutMomentFragment"
+        tools:layout="@layout/fragment_moment" />
+
+    <fragment
+        android:id="@+id/drawerLayoutArticleFragment"
+        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutArticleFragment"
+        tools:layout="@layout/fragment_article" />
+
+    <fragment
+        android:id="@+id/drawerLayoutVideoFragment"
+        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutVideoFragment"
+        tools:layout="@layout/fragment_video" />
+
+    <fragment
+        android:id="@+id/drawerLayoutStarFragment"
+        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutStarFragment"
+        tools:layout="@layout/fragment_star" />
+
+    <fragment
+        android:id="@+id/drawerLayoutDownloadFragment"
+        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutDownloadFragment"
+        tools:layout="@layout/fragment_download" />
+
+    <fragment
+        android:id="@+id/drawerLayoutSettingsFragment"
+        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutSettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
