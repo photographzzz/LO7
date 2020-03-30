@@ -168,5 +168,4 @@ public class UserVO extends BaseObservable {
                 .placeholder(R.mipmap.ic_launcher).into(view);
     }
 
-
 }

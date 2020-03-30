@@ -1,4 +1,4 @@
-package com.photograph.lo7.ui.userinfofragments;
+package com.photograph.lo7.ui.userprofilefragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 
 import com.photograph.lo7.R;
 
-public class UpdateEmailFragment extends Fragment {
+public class UpdatePicFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_update_email, container, false);
+        return inflater.inflate(R.layout.fragment_update_pic, container, false);
     }
 }

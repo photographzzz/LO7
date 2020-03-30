@@ -15,18 +15,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.userinfofragments.UpdateUserInfoActivity">
+        android:orientation="vertical">
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
-            android:id="@+id/update_pic"
+            android:id="@+id/update_pic_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="头像"
             app:mPic="@{user.pic,default = `R.drawable.nav_icon`}" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
-            android:id="@+id/update_username"
+            android:id="@+id/update_username_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="用户名"
@@ -34,28 +33,28 @@
 
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
-            android:id="@+id/update_bio"
+            android:id="@+id/update_bio_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="签名"
             app:mInfo="@{user.bio,default = `没有签名哦`}" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
-            android:id="@+id/update_gender"
+            android:id="@+id/update_gender_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="性别 "
             app:mInfo="@{String.valueOf(user.gender).equals(`0`) ? `男` :`女` }" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
-            android:id="@+id/update_email"
+            android:id="@+id/update_email_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="邮箱"
             app:mInfo="@{user.email}" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
-            android:id="@+id/update_phone"
+            android:id="@+id/update_phone_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="电话"

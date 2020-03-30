@@ -16,7 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.NavigationHeaderBinding;
-import com.photograph.lo7.ui.userinfofragments.UpdateUserInfoActivity;
+import com.photograph.lo7.ui.userprofilefragments.UpdateUserProfileActivity;
 import com.photograph.lo7.vo.UserVO;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.navigation_user_info) {
-            Intent intent = new Intent(HomeActivity.this, UpdateUserInfoActivity.class);
+            Intent intent = new Intent(HomeActivity.this, UpdateUserProfileActivity.class);
             startActivity(intent);
         }
     }

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/updateInfoFragment"
-        android:name="com.photograph.lo7.ui.userinfofragments.UpdateInfoFragment"
+        android:name="com.photograph.lo7.ui.userprofilefragments.UpdateProfileFragment"
         android:label="个人信息">
         <action
             android:id="@+id/action_mainFragment_to_updatePicFragment"
@@ -30,33 +30,34 @@
 
     <fragment
         android:id="@+id/updatePicFragment"
-        android:name="com.photograph.lo7.ui.userinfofragments.UpdatePicFragment"
+        android:name="com.photograph.lo7.ui.userprofilefragments.UpdatePicFragment"
         android:label="头像" />
 
     <fragment
         android:id="@+id/updateUsernameFragment"
-        android:name="com.photograph.lo7.ui.userinfofragments.UpdateUsernameFragment"
+        android:name="com.photograph.lo7.ui.userprofilefragments.UpdateUsernameFragment"
         android:label="用户名" />
 
     <fragment
         android:id="@+id/updateBioFragment"
-        android:name="com.photograph.lo7.ui.userinfofragments.UpdateBioFragment"
+        android:name="com.photograph.lo7.ui.userprofilefragments.UpdateBioFragment"
         android:label="签名" />
 
     <fragment
         android:id="@+id/updateGenderFragment"
-        android:name="com.photograph.lo7.ui.userinfofragments.UpdateGenderFragment"
+        android:name="com.photograph.lo7.ui.userprofilefragments.UpdateGenderFragment"
         android:label="性别" />
 
     <fragment
         android:id="@+id/updateEmailFragment"
-        android:name="com.photograph.lo7.ui.userinfofragments.UpdateEmailFragment"
+        android:name="com.photograph.lo7.ui.userprofilefragments.UpdateEmailFragment"
         android:label="邮箱" />
 
     <fragment
         android:id="@+id/updatePhoneFragment"
-        android:name="com.photograph.lo7.ui.userinfofragments.UpdatePhoneFragment"
+        android:name="com.photograph.lo7.ui.userprofilefragments.UpdatePhoneFragment"
         android:label="电话" />
+
 
 
 </navigation>

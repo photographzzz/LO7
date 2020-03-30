@@ -25,7 +25,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/graph_update_info_activity"/>
+            app:navGraph="@navigation/graph_update_profile_activity"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
