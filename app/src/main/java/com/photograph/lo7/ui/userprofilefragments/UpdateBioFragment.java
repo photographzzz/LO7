@@ -60,8 +60,6 @@ public class UpdateBioFragment extends Fragment implements MenuItem.OnMenuItemCl
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-
-
         if (item.getItemId() == R.id.item_verify) {
             String bio = updateBioTxt.getText().toString();
             RxHttp.postForm("user/update_bio")
