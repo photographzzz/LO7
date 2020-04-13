@@ -21,13 +21,13 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentUpdateUsernameBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.vo.UserVO;
+import com.photograph.lo7.entity.User;
 
 import rxhttp.wrapper.param.RxHttp;
 
 public class UpdateUsernameFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updateUsernameTxt;
-    private UserVO userVO;
+    private User user;
     private FragmentUpdateUsernameBinding updateUsernameBinding;
 
 
@@ -36,9 +36,9 @@ public class UpdateUsernameFragment extends Fragment implements MenuItem.OnMenuI
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         updateUsernameBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_update_username, container, false);
-        userVO = AppHolder.currentUser;
+        user = AppHolder.currentUser;
         updateUsernameTxt = updateUsernameBinding.updateUsernameTxt;
-        updateUsernameTxt.setText(userVO.getUsername());
+        updateUsernameTxt.setText(user.getUsername());
         updateUsernameTxt.requestFocus();
         setHasOptionsMenu(true);
 
@@ -66,7 +66,7 @@ public class UpdateUsernameFragment extends Fragment implements MenuItem.OnMenuI
                     .add("username", username)
                     .asResponse(String.class)
                     .subscribe(s -> {
-                        userVO.setUsername(username);
+                        user.setUsername(username);
                         Navigation.findNavController(updateUsernameBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {
                         error.show(error.getErrorCode() == 0 ? "修改成功" : "修改失败");

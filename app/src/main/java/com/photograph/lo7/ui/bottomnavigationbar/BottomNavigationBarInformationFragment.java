@@ -22,7 +22,8 @@ public class BottomNavigationBarInformationFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, container, false);
 
         tabLayout = view.findViewById(R.id.information_tablayout);
@@ -32,7 +33,8 @@ public class BottomNavigationBarInformationFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText(titles[1]));
         tabLayout.addTab(tabLayout.newTab().setText(titles[2]));
         tabLayout.addTab(tabLayout.newTab().setText(titles[3]));
-        InformationFragmentViewPager informationFragmentViewPager = new InformationFragmentViewPager(getActivity().getSupportFragmentManager(), titles);
+        InformationFragmentViewPager informationFragmentViewPager =
+                new InformationFragmentViewPager(getActivity().getSupportFragmentManager(), titles);
         viewPager.setAdapter(informationFragmentViewPager);
 
 

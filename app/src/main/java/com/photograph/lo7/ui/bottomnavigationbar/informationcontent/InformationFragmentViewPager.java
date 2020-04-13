@@ -18,7 +18,7 @@ public class InformationFragmentViewPager extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i) {
         if (i == 0) {
-            return new RecommendInformationFragment();
+            return new SynthesisInformationFragment();
         } else if (i == 1) {
             return new MatchInformationFragment();
         } else if (i == 2) {
@@ -26,7 +26,7 @@ public class InformationFragmentViewPager extends FragmentPagerAdapter {
         } else if (i == 3) {
             return new PlayingInformationFragment();
         }
-        return new RecommendInformationFragment();
+        return new SynthesisInformationFragment();
     }
 
     @Override

@@ -18,7 +18,7 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentRegisterBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.util.FragmentUtils;
-import com.photograph.lo7.vo.UserVO;
+import com.photograph.lo7.entity.User;
 
 import rxhttp.wrapper.param.RxHttp;
 
@@ -73,7 +73,7 @@ public class RegisterFragment extends Fragment {
                     .add("gender", gender)
                     .add("email", email)
                     .add("phone", phone)
-                    .asResponse(UserVO.class)
+                    .asResponse(User.class)
                     .subscribe(userVO -> {
                         AppHolder.currentUser = userVO;
                         FragmentUtils.attachFragment(FragmentUtils.context, FragmentUtils.LOGIN_FRAGMENT_TAG, R.id.main_content);

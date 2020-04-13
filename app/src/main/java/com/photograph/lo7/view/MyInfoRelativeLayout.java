@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import com.bumptech.glide.Glide;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.MyInfoRelativeLayoutBinding;
+import com.photograph.lo7.httpsender.Url;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,16 +62,6 @@ public class MyInfoRelativeLayout extends RelativeLayout {
         circleImageView = infoRelativeLayoutBinding.updateForward;
 
 
-
-        // LayoutInflater.from(context).inflate(R.layout.my_info_relative_layout, this);
-
-
-        //hintTextView = findViewById(R.id.info_hint_txt);
-        //infoTextView = findViewById(R.id.info_txt);
-        //picImageView = findViewById(R.id.pic_img);
-        //circleImageView = findViewById(R.id.update_forward);
-
-
         // 根据此行是不是要显示头像，来设置控件的可见性
         if (hint.equals("头像")) {
             circleImageView.setVisibility(GONE);
@@ -92,8 +83,7 @@ public class MyInfoRelativeLayout extends RelativeLayout {
     @BindingAdapter(value = {"mPic"})
     public static void loadImg(MyInfoRelativeLayout view, String mPic) {
         Glide.with(view)
-                .load(mPic.replace("image.LO7.com", "192.168.0.102"))
-                .placeholder(R.drawable.nav_icon)
+                .load(mPic.replace("http://image.LO7.com/", Url.imageHost))
                 .error(R.drawable.nav_icon)
                 .centerCrop()
                 .into(view.getPicImageView());

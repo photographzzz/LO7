@@ -8,7 +8,7 @@
 
         <variable
             name="user"
-            type="com.photograph.lo7.vo.UserVO" />
+            type="com.photograph.lo7.entity.User" />
     </data>
 
 

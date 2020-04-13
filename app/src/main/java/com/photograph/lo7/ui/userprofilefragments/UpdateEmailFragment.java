@@ -21,13 +21,13 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentUpdateEmailBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.vo.UserVO;
+import com.photograph.lo7.entity.User;
 
 import rxhttp.wrapper.param.RxHttp;
 
 public class UpdateEmailFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updateEmailTxt;
-    private UserVO userVO;
+    private User user;
     private FragmentUpdateEmailBinding updateEmailBinding;
 
 
@@ -36,9 +36,9 @@ public class UpdateEmailFragment extends Fragment implements MenuItem.OnMenuItem
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         updateEmailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_update_email, container, false);
-        userVO = AppHolder.currentUser;
+        user = AppHolder.currentUser;
         updateEmailTxt = updateEmailBinding.updateEmailTxt;
-        updateEmailTxt.setText(userVO.getEmail());
+        updateEmailTxt.setText(user.getEmail());
         updateEmailTxt.requestFocus();
         setHasOptionsMenu(true);
 
@@ -66,7 +66,7 @@ public class UpdateEmailFragment extends Fragment implements MenuItem.OnMenuItem
                     .add("email", email)
                     .asResponse(String.class)
                     .subscribe(s -> {
-                        userVO.setEmail(email);
+                        user.setEmail(email);
                         Navigation.findNavController(updateEmailBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {
                         error.show(error.getErrorCode() == 0 ? "修改成功" : "修改失败");

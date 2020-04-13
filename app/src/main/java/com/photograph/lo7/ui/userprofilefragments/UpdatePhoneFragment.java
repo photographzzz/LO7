@@ -21,13 +21,13 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentUpdatePhoneBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.vo.UserVO;
+import com.photograph.lo7.entity.User;
 
 import rxhttp.wrapper.param.RxHttp;
 
 public class UpdatePhoneFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updatePhoneTxt;
-    private UserVO userVO;
+    private User user;
     private FragmentUpdatePhoneBinding updatePhoneBinding;
 
 
@@ -36,9 +36,9 @@ public class UpdatePhoneFragment extends Fragment implements MenuItem.OnMenuItem
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         updatePhoneBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_update_phone, container, false);
-        userVO = AppHolder.currentUser;
+        user = AppHolder.currentUser;
         updatePhoneTxt = updatePhoneBinding.updatePhoneTxt;
-        updatePhoneTxt.setText(userVO.getPhone());
+        updatePhoneTxt.setText(user.getPhone());
         updatePhoneTxt.requestFocus();
         setHasOptionsMenu(true);
 
@@ -66,7 +66,7 @@ public class UpdatePhoneFragment extends Fragment implements MenuItem.OnMenuItem
                     .add("phone", phone)
                     .asResponse(String.class)
                     .subscribe(s -> {
-                        userVO.setPhone(phone);
+                        user.setPhone(phone);
                         Navigation.findNavController(updatePhoneBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {
                         error.show(error.getErrorCode() == 0 ? "修改成功" : "修改失败");

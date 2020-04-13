@@ -47,6 +47,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    //动态权限申请库
+    implementation 'pub.devrel:easypermissions:2.0.0'
+
+
     implementation 'com.github.SheHuan:NiceImageView:1.0.5'
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
@@ -59,5 +63,5 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'  //切换主线程，Android工程必须
     implementation 'com.rxjava.rxlife:rxlife-x:2.0.0'  //页面销毁，关闭请求，非必须
 
-
+    implementation 'com.wx.goodview:goodview:1.0.0'  //点赞动画
 }

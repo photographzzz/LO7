@@ -21,13 +21,13 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentUpdateBioBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.vo.UserVO;
+import com.photograph.lo7.entity.User;
 
 import rxhttp.wrapper.param.RxHttp;
 
 public class UpdateBioFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updateBioTxt;
-    private UserVO userVO;
+    private User user;
     private FragmentUpdateBioBinding updateBioBinding;
 
 
@@ -36,9 +36,9 @@ public class UpdateBioFragment extends Fragment implements MenuItem.OnMenuItemCl
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         updateBioBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_update_bio, container, false);
-        userVO = AppHolder.currentUser;
+        user = AppHolder.currentUser;
         updateBioTxt = updateBioBinding.updateBioTxt;
-        updateBioTxt.setText(userVO.getBio());
+        updateBioTxt.setText(user.getBio());
         updateBioTxt.requestFocus();
         setHasOptionsMenu(true);
 
@@ -66,7 +66,7 @@ public class UpdateBioFragment extends Fragment implements MenuItem.OnMenuItemCl
                     .add("bio", bio)
                     .asResponse(String.class)
                     .subscribe(s -> {
-                        userVO.setBio(bio);
+                        user.setBio(bio);
                         Navigation.findNavController(updateBioBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {
                         error.show(error.getErrorCode() == 0 ? "修改成功" : "修改失败");

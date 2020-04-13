@@ -1,7 +1,8 @@
-package com.photograph.lo7.vo;
+package com.photograph.lo7.entity;
 
 
 import android.net.Uri;
+import android.widget.ImageView;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -11,10 +12,11 @@ import androidx.databinding.Observable;
 import com.bumptech.glide.Glide;
 import com.photograph.lo7.BR;
 import com.photograph.lo7.R;
+import com.photograph.lo7.httpsender.Url;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserVO extends BaseObservable {
+public class User extends BaseObservable {
     private Integer id;
     private String username;
     private Integer gender;
@@ -161,11 +163,5 @@ public class UserVO extends BaseObservable {
         notifyPropertyChanged(BR.role);
     }
 
-    // 与HomeActivity的侧拉导航栏头部CircleImageView保持绑定，当用户pic字段变化时，自动刷新头像
-    @BindingAdapter({"url"})
-    public static void loadImage(CircleImageView view, String src) {
-       Glide.with(view.getContext()).load(Uri.parse(src.replace("image.LO7.com", "192.168.0.102")))
-                .placeholder(R.mipmap.ic_launcher).into(view);
-    }
 
 }

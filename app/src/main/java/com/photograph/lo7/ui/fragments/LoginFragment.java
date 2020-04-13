@@ -17,16 +17,14 @@ import androidx.fragment.app.Fragment;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.FragmentLoginBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.ui.activities.HomeActivity;
 import com.photograph.lo7.util.FragmentUtils;
-import com.photograph.lo7.vo.UserVO;
-
-import rxhttp.wrapper.param.RxHttp;
+import com.rxjava.rxlife.RxLife;
 
 public class LoginFragment extends Fragment {
-
     FragmentLoginBinding loginBinding;
     Context context;
 
@@ -50,14 +48,13 @@ public class LoginFragment extends Fragment {
             String username = usernameText.getText().toString();
             String password = passwordText.getText().toString();
 
-            RxHttp.postForm("user/login?")
-                    .add("username", username)
-                    .add("password", password)
-                    .asResponse(UserVO.class)
-                    .subscribe(userVO -> {
-                        AppHolder.currentUser = userVO;
-                        Intent intent = new Intent(context, HomeActivity.class);
+            UserController.getInstance().login(username, password)
+                    .as(RxLife.asOnMain(this))
+                    .subscribe(user -> {
+                        AppHolder.currentUser = user;
+                        Intent intent = new Intent(getContext(), HomeActivity.class);
                         startActivity(intent);
+                        getActivity().finish();
                     }, (OnError) error -> {
                         error.show(error.getErrorMsg());
                     });

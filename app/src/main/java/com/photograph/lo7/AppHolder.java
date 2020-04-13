@@ -2,9 +2,10 @@ package com.photograph.lo7;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 
 import com.photograph.lo7.httpsender.RxHttpManager;
-import com.photograph.lo7.vo.UserVO;
+import com.photograph.lo7.entity.User;
 
 /**
  * 自定义Application
@@ -12,8 +13,9 @@ import com.photograph.lo7.vo.UserVO;
 public class AppHolder extends Application {
 
     private static AppHolder instance;
-    public static UserVO currentUser;
+    public static User currentUser;
 
+    public final static String userPicPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/lo7/user/pic";
 
 
     public static AppHolder getInstance() {
@@ -29,7 +31,7 @@ public class AppHolder extends Application {
 
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-       //TODO MultiDex.install(this);
+        //TODO MultiDex.install(this);
     }
 
 }

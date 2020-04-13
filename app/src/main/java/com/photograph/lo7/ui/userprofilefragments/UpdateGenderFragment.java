@@ -20,24 +20,24 @@ import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentUpdateGenderBinding;
 import com.photograph.lo7.httpsender.OnError;
-import com.photograph.lo7.vo.UserVO;
+import com.photograph.lo7.entity.User;
 
 import rxhttp.wrapper.param.RxHttp;
 
 public class UpdateGenderFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private FragmentUpdateGenderBinding updateGenderBinding;
-    private UserVO userVO;
+    private User user;
     private RadioGroup radioGroup;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         updateGenderBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_update_gender, container, false);
-        userVO = AppHolder.currentUser;
+        user = AppHolder.currentUser;
         radioGroup = updateGenderBinding.genderRg;
         RadioButton maleRB = updateGenderBinding.maleRb;
         RadioButton femaleRB = updateGenderBinding.femaleRb;
-        if (userVO.getGender() == 0) {
+        if (user.getGender() == 0) {
             maleRB.requestFocus();
         } else {
             femaleRB.requestFocus();
@@ -70,7 +70,7 @@ public class UpdateGenderFragment extends Fragment implements MenuItem.OnMenuIte
                     .add("gender", gender)
                     .asResponse(String.class)
                     .subscribe(s -> {
-                        userVO.setGender(gender);
+                        user.setGender(gender);
                         Navigation.findNavController(updateGenderBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {
                         error.show(error.getErrorCode() == 0 ? "修改成功" : "修改失败");
