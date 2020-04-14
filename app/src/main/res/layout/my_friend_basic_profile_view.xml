@@ -4,9 +4,18 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="user"
+            type="com.photograph.lo7.entity.User" />
         <variable
             name="friend"
             type="com.photograph.lo7.entity.Friend" />
+
+        <variable
+            name="presenter"
+            type="com.photograph.lo7.ui.activities.ArticleActivity.Presenter" />
     </data>
 
     <RelativeLayout
@@ -26,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="70dp"
+            android:layout_marginEnd="70dp"
             android:layout_toEndOf="@id/friend_pic_cirimg"
             android:layout_toRightOf="@id/friend_pic_cirimg"
             android:orientation="vertical">
@@ -42,16 +52,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@{String.valueOf(friend.followCount)+`粉丝`}" />
+                android:text="@{String.valueOf(friend.followCount)+`关注  ·  `+String.valueOf(friend.followerCount)+`粉丝`}" />
         </LinearLayout>
 
 
         <ImageButton
+            android:id="@+id/follow_btn"
             android:layout_width="65dp"
-            android:layout_height="match_parent"
+            android:layout_height="65dp"
             android:layout_alignParentEnd="true"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_alignParentRight="true"
-            android:src="@drawable/nav_icon" />
+            bind:follow_btn_img = "@{friend.hasBeenFollowed}"
+            android:onClick="@{() -> presenter.onClickFollowButton(friend.id, friend.hasBeenFollowed)}"
+            android:visibility="@{user.id == friend.id ? View.GONE : View.VISIBLE }"/>
 
 
     </RelativeLayout>

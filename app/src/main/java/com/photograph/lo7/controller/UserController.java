@@ -31,4 +31,32 @@ public class UserController {
     public Observable<Friend> getFriendProfile(int friendId) {
         return userService.getFriendProfile(friendId);
     }
+
+    public Observable<User> register(String username, String password, Integer gender, String email, String phone){
+        return userService.register(username, password, gender, email, phone);
+    }
+
+    public Observable updateUsername(String username){
+        return userService.updateUsername(username);
+    }
+
+    public Observable updateBio(String bio){
+        return userService.updateBio(bio);
+    }
+
+    public Observable updateEmail(String email){
+        return userService.updateEmail(email);
+    }
+
+    public Observable updatePhone(String phone){
+        return userService.updatePhone(phone);
+    }
+
+    public Observable updateGender(int gender){
+        return userService.updateGender(gender);
+    }
+
+    public Observable resetPassword(String password){
+        return userService.resetPassword(password);
+    }
 }

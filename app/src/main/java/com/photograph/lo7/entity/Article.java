@@ -24,6 +24,8 @@ public class Article extends BaseObservable {
 
     private String relativeDate;
 
+    private String absoluteDate;
+
     public Integer getId() {
         return id;
     }
@@ -102,5 +104,13 @@ public class Article extends BaseObservable {
 
     public void setRelativeDate(String relativeDate) {
         this.relativeDate = relativeDate;
+    }
+
+    public String getAbsoluteDate() {
+        return absoluteDate;
+    }
+
+    public void setAbsoluteDate(String absoluteDate) {
+        this.absoluteDate = absoluteDate;
     }
 }

@@ -2,6 +2,7 @@ package com.photograph.lo7.util;
 
 import android.net.Uri;
 import android.text.TextUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
@@ -50,5 +51,11 @@ public class BindUtils {
                     .error(R.drawable.nav_icon)
                     .into(view);
         }
+    }
+
+    @BindingAdapter("follow_btn_img")
+    public static void loadFollowButton(ImageButton view, boolean hasBennFollowed) {
+        Glide.with(view).load(view.getContext().getResources()
+                .getDrawable(hasBennFollowed ? R.drawable.ic_follow_checked : R.drawable.ic_follow)).into(view);
     }
 }

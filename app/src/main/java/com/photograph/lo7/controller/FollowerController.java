@@ -1,6 +1,7 @@
 package com.photograph.lo7.controller;
 
 import com.photograph.lo7.entity.Friend;
+import com.photograph.lo7.httpsender.entity.Response;
 import com.photograph.lo7.service.IFollowerService;
 import com.photograph.lo7.service.impl.FollowerServiceImpl;
 
@@ -32,20 +33,20 @@ public class FollowerController {
         return followerService.getAllFollower(userId);
     }
 
-    public Observable follow(int friendId){
+    public Observable<Integer>  follow(int friendId){
         return followerService.follow(friendId);
     }
 
-    public Observable unfollow( int friendId){
+    public Observable<Integer>  unfollow(int friendId){
         return followerService.unfollow(friendId);
     }
 
 
-    public Observable checkIsFollow(int friendId) {
+    public Observable<Boolean> checkIsFollow(int friendId) {
         return followerService.checkIsFollow(friendId);
     }
 
-    public Observable checkIsFollower(int friendId){
+    public Observable<Boolean> checkIsFollower(int friendId){
         return followerService.checkIsFollower(friendId);
     }
 }

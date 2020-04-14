@@ -22,9 +22,12 @@ public class ArticleController {
         private static final ArticleController instance = new ArticleController();
     }
 
-
-    public Observable<List<Article>> getAllArticles() {
+    public Observable<List<Article>> getAllArticles(){
         return articleService.getAllArticles();
+    }
+
+    public Observable<Article> getArticleById(int articleId) {
+        return articleService.getArticleById(articleId);
     }
 
     public Observable<List<Article>> getVersionArticles(){

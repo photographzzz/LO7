@@ -12,11 +12,11 @@ public interface IFollowerService {
 
     public Observable<List<Friend>> getAllFollower(int userId);
 
-    public Observable follow(int friendId);
+    public Observable<Integer>  follow(int friendId);
 
-    public Observable unfollow( int friendId);
+    public Observable<Integer>  unfollow( int friendId);
 
-    public Observable checkIsFollow(int friendId);
+    public Observable<Boolean> checkIsFollow(int friendId);
 
-    public Observable checkIsFollower(int friendId);
+    public Observable<Boolean> checkIsFollower(int friendId);
 }

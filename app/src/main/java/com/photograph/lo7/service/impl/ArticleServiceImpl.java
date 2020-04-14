@@ -11,6 +11,13 @@ import rxhttp.wrapper.param.RxHttp;
 
 public class ArticleServiceImpl implements IArticleServiceImpl {
     @Override
+    public Observable<Article> getArticleById(int articleId) {
+        return RxHttp.get("/article/article_id")
+                .add("articleId", articleId)
+                .asResponse(Article.class);
+    }
+
+    @Override
     public Observable<List<Article>> getAllArticles() {
         return RxHttp.get("/article/all")
                 .asResponseList(Article.class);

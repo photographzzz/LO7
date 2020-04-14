@@ -14,15 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.ArticleAdapter;
+import com.photograph.lo7.controller.ArticleController;
 import com.photograph.lo7.databinding.FragmentInformationSynthesisBinding;
-import com.photograph.lo7.entity.Article;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.util.SpaceItemDecoration;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import rxhttp.wrapper.param.RxHttp;
+import com.rxjava.rxlife.RxLife;
 
 public class SynthesisInformationFragment extends Fragment {
     private FragmentInformationSynthesisBinding synthesisBinding;
@@ -34,27 +30,22 @@ public class SynthesisInformationFragment extends Fragment {
         synthesisBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_synthesis, container, false);
         RecyclerView recyclerView = synthesisBinding.synthesisArticleRecyclerview;
 
-        List<Article> data = new ArrayList<>();
-        RxHttp.get("/article/all")
-                .asResponseList(Article.class)
-                .subscribe(articles -> {
-                    for (Article article : articles) {
-                        data.add(article);
-                    }
-                },(OnError) error ->{
-                    error.show(error.getErrorMsg());
-                });
 
-        ArticleAdapter adapter = new ArticleAdapter(getContext(), data);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
+        ArticleController.getInstance().getAllArticles()
+                .as(RxLife.asOnMain(this))
+                .subscribe(articles -> {
+                    ArticleAdapter adapter = new ArticleAdapter(getContext(), articles);
+                    recyclerView.setAdapter(adapter);
+                }, (OnError) error -> {
+                    error.show(error.getErrorMsg());
+                });
 
 
         return synthesisBinding.getRoot();
     }
-
 
 
     @Override

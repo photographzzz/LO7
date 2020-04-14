@@ -8,6 +8,14 @@
         <variable
             name="friend"
             type="com.photograph.lo7.entity.Friend" />
+
+        <variable
+            name="article"
+            type="com.photograph.lo7.entity.Article" />
+
+        <variable
+            name="presenter"
+            type="com.photograph.lo7.ui.activities.ArticleActivity.Presenter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -31,10 +39,24 @@
                 android:descendantFocusability="blocksDescendants"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{article.title}"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{article.absoluteDate+`  ·  `+ article.readingCount+`阅读  ·  ` + article.likes+`点赞  ·  ` +article.stars +`收藏`}"
+                    android:textSize="10sp" />
+
                 <include
                     android:id="@+id/article_author_basic_profile"
                     layout="@layout/my_friend_basic_profile_view"
-                    bind:friend="@{friend}" />
+                    bind:friend="@{friend}"
+                    bind:presenter="@{presenter}"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/article_sections_recyclerview"

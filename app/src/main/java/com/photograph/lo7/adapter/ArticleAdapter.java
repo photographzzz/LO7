@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.ItemArticleBinding;
 import com.photograph.lo7.entity.Article;
@@ -35,14 +36,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         binding.setArticle(articles.get(position));
         binding.executePendingBindings();
         binding.getRoot().setOnClickListener(v -> {
-            Article article = articles.get(position);
+            AppHolder.currentArticle = articles.get(position);
             Intent intent = new Intent(context, ArticleActivity.class);
-            intent.putExtra("id", article.getId());
-            intent.putExtra("title", article.getTitle());
-            intent.putExtra("preview", article.getPreview());
-            intent.putExtra("likes", article.getLikes());
-            intent.putExtra("stars", article.getStars());
-            intent.putExtra("authorId", article.getAuthorId());
             context.startActivity(intent);
         });
     }

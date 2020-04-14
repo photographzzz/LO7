@@ -8,6 +8,8 @@ import io.reactivex.Observable;
 
 public interface IArticleServiceImpl {
 
+    public Observable<Article> getArticleById(int articleId);
+
     public Observable<List<Article>> getAllArticles();
 
     public Observable<List<Article>> getVersionArticles();
