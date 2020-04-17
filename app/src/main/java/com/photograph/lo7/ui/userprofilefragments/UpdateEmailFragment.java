@@ -18,12 +18,12 @@ import androidx.navigation.Navigation;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.FragmentUpdateEmailBinding;
+import com.photograph.lo7.entity.User;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.entity.User;
-
-import rxhttp.wrapper.param.RxHttp;
+import com.rxjava.rxlife.RxLife;
 
 public class UpdateEmailFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updateEmailTxt;
@@ -62,10 +62,9 @@ public class UpdateEmailFragment extends Fragment implements MenuItem.OnMenuItem
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String email = updateEmailTxt.getText().toString();
-            RxHttp.get("user/update_email")
-                    .add("email", email)
-                    .asResponse(String.class)
-                    .subscribe(s -> {
+            UserController.getInstance().updateEmail(email)
+                    .as(RxLife.asOnMain(this))
+                    .subscribe(result ->{
                         user.setEmail(email);
                         Navigation.findNavController(updateEmailBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {

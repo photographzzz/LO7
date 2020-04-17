@@ -142,9 +142,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                             author.setFollowerCount(author.getFollowerCount() - 1);
                             AppHolder.currentUser.setFollowCount(followCount);
                             Tip.show("取消关注成功！");
-                        }, (OnError) error -> {
-                            error.show(error.getErrorMsg());
-                        });
+                        }, (OnError) error -> error.show(error.getErrorMsg()));
             }else {
                 FollowerController.getInstance().follow(friendId)
                         .as(RxLife.asOnMain(articleBinding.getRoot()))
@@ -153,9 +151,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                             author.setFollowerCount(author.getFollowerCount()  + 1);
                             AppHolder.currentUser.setFollowCount(followCount);
                             Tip.show("关注成功！");
-                        }, (OnError) error -> {
-                            error.show(error.getErrorMsg());
-                        });
+                        }, (OnError) error -> error.show(error.getErrorMsg()));
 
             }
         }

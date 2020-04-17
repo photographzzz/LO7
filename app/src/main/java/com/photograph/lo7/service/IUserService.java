@@ -10,15 +10,15 @@ public interface IUserService {
 
     public Observable<User> register(String username, String password, Integer gender, String email, String phone);
 
-    public Observable updateUsername(String username);
+    public Observable<String> updateUsername(String username);
 
-    public Observable updateBio(String bio);
+    public Observable<String> updateBio(String bio);
 
-    public Observable updateEmail(String email);
+    public Observable<String> updateEmail(String email);
 
-    public Observable updatePhone(String phone);
+    public Observable<String> updatePhone(String phone);
 
-    public Observable updateGender(int gender);
+    public Observable<Integer> updateGender(int gender);
 
     public Observable resetPassword(String password);
 

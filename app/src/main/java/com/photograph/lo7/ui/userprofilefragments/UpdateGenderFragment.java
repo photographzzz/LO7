@@ -18,11 +18,11 @@ import androidx.navigation.Navigation;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.FragmentUpdateGenderBinding;
-import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.entity.User;
-
-import rxhttp.wrapper.param.RxHttp;
+import com.photograph.lo7.httpsender.OnError;
+import com.rxjava.rxlife.RxLife;
 
 public class UpdateGenderFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private FragmentUpdateGenderBinding updateGenderBinding;
@@ -66,10 +66,9 @@ public class UpdateGenderFragment extends Fragment implements MenuItem.OnMenuIte
         if (item.getItemId() == R.id.item_verify) {
             Integer gender = radioGroup.getCheckedRadioButtonId() == R.id.male_rb ? 0 : 1;
 
-            RxHttp.postForm("user/update_gender")
-                    .add("gender", gender)
-                    .asResponse(String.class)
-                    .subscribe(s -> {
+            UserController.getInstance().updateGender(gender)
+                    .as(RxLife.asOnMain(this))
+                    .subscribe(result ->{
                         user.setGender(gender);
                         Navigation.findNavController(updateGenderBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {

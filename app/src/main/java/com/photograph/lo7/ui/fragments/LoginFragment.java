@@ -34,8 +34,6 @@ public class LoginFragment extends Fragment {
         this.context = context;
     }
 
-    @SuppressLint("CheckResult")
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);

@@ -18,12 +18,12 @@ import androidx.navigation.Navigation;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.FragmentUpdateUsernameBinding;
+import com.photograph.lo7.entity.User;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.entity.User;
-
-import rxhttp.wrapper.param.RxHttp;
+import com.rxjava.rxlife.RxLife;
 
 public class UpdateUsernameFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updateUsernameTxt;
@@ -62,10 +62,9 @@ public class UpdateUsernameFragment extends Fragment implements MenuItem.OnMenuI
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String username = updateUsernameTxt.getText().toString();
-            RxHttp.postForm("user/update_username")
-                    .add("username", username)
-                    .asResponse(String.class)
-                    .subscribe(s -> {
+            UserController.getInstance().updateUsername(username)
+                    .as(RxLife.asOnMain(this))
+                    .subscribe(result ->{
                         user.setUsername(username);
                         Navigation.findNavController(updateUsernameBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {

@@ -18,12 +18,12 @@ import androidx.navigation.Navigation;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.FragmentUpdatePhoneBinding;
+import com.photograph.lo7.entity.User;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.entity.User;
-
-import rxhttp.wrapper.param.RxHttp;
+import com.rxjava.rxlife.RxLife;
 
 public class UpdatePhoneFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updatePhoneTxt;
@@ -62,10 +62,9 @@ public class UpdatePhoneFragment extends Fragment implements MenuItem.OnMenuItem
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String phone = updatePhoneTxt.getText().toString();
-            RxHttp.postForm("user/update_phone")
-                    .add("phone", phone)
-                    .asResponse(String.class)
-                    .subscribe(s -> {
+            UserController.getInstance().updatePhone(phone)
+                    .as(RxLife.asOnMain(this))
+                    .subscribe(result ->{
                         user.setPhone(phone);
                         Navigation.findNavController(updatePhoneBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {

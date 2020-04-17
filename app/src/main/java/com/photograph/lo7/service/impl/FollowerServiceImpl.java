@@ -25,7 +25,7 @@ public class FollowerServiceImpl implements IFollowerService {
 
     @Override
     public Observable<Integer> follow(int friendId) {
-        return RxHttp.get("/follower/follow_friend")
+        return RxHttp.postForm("/follower/follow_friend")
                 .add("friendId", friendId)
                 .asResponse(Integer.class);
     }

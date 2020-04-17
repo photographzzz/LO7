@@ -18,12 +18,12 @@ import androidx.navigation.Navigation;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.FragmentUpdateBioBinding;
+import com.photograph.lo7.entity.User;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.view.MyEditText;
-import com.photograph.lo7.entity.User;
-
-import rxhttp.wrapper.param.RxHttp;
+import com.rxjava.rxlife.RxLife;
 
 public class UpdateBioFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
     private MyEditText updateBioTxt;
@@ -62,10 +62,9 @@ public class UpdateBioFragment extends Fragment implements MenuItem.OnMenuItemCl
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String bio = updateBioTxt.getText().toString();
-            RxHttp.postForm("user/update_bio")
-                    .add("bio", bio)
-                    .asResponse(String.class)
-                    .subscribe(s -> {
+            UserController.getInstance().updateBio(bio)
+                    .as(RxLife.asOnMain(this))
+                    .subscribe(result ->{
                         user.setBio(bio);
                         Navigation.findNavController(updateBioBinding.getRoot()).navigateUp();
                     }, (OnError) error -> {
