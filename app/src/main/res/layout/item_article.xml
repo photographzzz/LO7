@@ -42,13 +42,13 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{String.valueOf(article.visitCount)}" />
+                    android:text="@{String.valueOf(article.visitCount)+`阅读`}" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{String.valueOf(article.commentCount)}" />
+                    android:text="@{String.valueOf(article.commentCount)+`评论`}" />
 
 
             </LinearLayout>

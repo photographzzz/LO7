@@ -1,6 +1,9 @@
 package com.photograph.lo7.entity;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
+import com.photograph.lo7.BR;
 
 public class Visitable extends BaseObservable {
     private Integer id;
@@ -19,6 +22,10 @@ public class Visitable extends BaseObservable {
 
     private String absoluteDate;
 
+    private boolean hasStar;
+
+    private boolean hasLike;
+
     public Integer getId() {
         return id;
     }
@@ -35,36 +42,44 @@ public class Visitable extends BaseObservable {
         this.authorId = authorId;
     }
 
+    @Bindable
     public Integer getVisitCount() {
         return visitCount;
     }
 
     public void setVisitCount(Integer visitCount) {
         this.visitCount = visitCount;
+        notifyPropertyChanged(BR.visitCount);
     }
 
+    @Bindable
     public Integer getCommentCount() {
         return commentCount;
     }
 
     public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
+        notifyPropertyChanged(BR.commentCount);
     }
 
+    @Bindable
     public Integer getStars() {
         return stars;
     }
 
     public void setStars(Integer stars) {
         this.stars = stars;
+        notifyPropertyChanged(BR.stars);
     }
 
+    @Bindable
     public Integer getLikes() {
         return likes;
     }
 
     public void setLikes(Integer likes) {
         this.likes = likes;
+        notifyPropertyChanged(BR.likes);
     }
 
     public String getRelativeDate() {
@@ -81,5 +96,26 @@ public class Visitable extends BaseObservable {
 
     public void setAbsoluteDate(String absoluteDate) {
         this.absoluteDate = absoluteDate;
+    }
+
+
+    @Bindable
+    public boolean isHasStar() {
+        return hasStar;
+    }
+
+    public void setHasStar(boolean hasStar) {
+        this.hasStar = hasStar;
+        notifyPropertyChanged(BR.hasStar);
+    }
+
+    @Bindable
+    public boolean isHasLike() {
+        return hasLike;
+    }
+
+    public void setHasLike(boolean hasLike) {
+        this.hasLike = hasLike;
+        notifyPropertyChanged(BR.hasLike);
     }
 }

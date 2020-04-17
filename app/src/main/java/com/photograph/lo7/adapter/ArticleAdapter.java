@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.controller.ArticleController;
 import com.photograph.lo7.databinding.ItemArticleBinding;
 import com.photograph.lo7.entity.Article;
+import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.ui.activities.ArticleActivity;
+import com.rxjava.rxlife.RxLife;
 
 import java.util.List;
 
@@ -36,7 +39,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         binding.setArticle(articles.get(position));
         binding.executePendingBindings();
         binding.getRoot().setOnClickListener(v -> {
-            AppHolder.currentArticle = articles.get(position);
+            Article article = articles.get(position);
+            AppHolder.currentArticle = article;
+            ArticleController.getInstance().visitArticle(article.getId())
+                    .as(RxLife.asOnMain(holder.itemView.getRootView()))
+                    .subscribe(success -> {
+                        article.setVisitCount(article.getVisitCount() + 1);
+                    }, (OnError) error -> error.show(error.getErrorMsg()));
             Intent intent = new Intent(context, ArticleActivity.class);
             context.startActivity(intent);
         });

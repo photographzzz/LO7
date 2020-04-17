@@ -40,4 +40,8 @@ public class ArticleController {
     public Observable<List<Article>> getStrategyArticles(){
         return articleService.getStrategyArticles();
     }
+
+    public Observable<String> visitArticle(int articleId) {
+        return articleService.visitArticle(articleId);
+    }
 }

@@ -19,4 +19,6 @@ public interface IArticleServiceImpl {
     public Observable<List<Article>> getStrategyArticles();
 
     public Observable<List<Article>> getArticlesByType(int type);
+
+    public Observable<String> visitArticle(int articleId);
 }

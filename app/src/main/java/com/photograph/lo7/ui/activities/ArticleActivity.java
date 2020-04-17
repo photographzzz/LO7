@@ -15,6 +15,7 @@ import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.SectionAdapter;
 import com.photograph.lo7.controller.FollowerController;
+import com.photograph.lo7.controller.ILikeController;
 import com.photograph.lo7.controller.IStarController;
 import com.photograph.lo7.controller.SectionController;
 import com.photograph.lo7.controller.UserController;
@@ -23,17 +24,18 @@ import com.photograph.lo7.entity.Article;
 import com.photograph.lo7.entity.Friend;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.httpsender.Tip;
+import com.photograph.lo7.util.LikeUtils;
 import com.photograph.lo7.util.SpaceItemDecoration;
+import com.photograph.lo7.util.StarUtils;
 import com.rxjava.rxlife.RxLife;
 
 public class ArticleActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityArticleBinding articleBinding;
     private RecyclerView recyclerView;
-    private boolean isLike;
-    private boolean isStar;
     private Friend author;
     private Article article = AppHolder.currentArticle;
     private IStarController starArticleController = IStarController.getStarArticleController();
+    private ILikeController likeArticleController = ILikeController.getLikeArticleController();
 
 
     @Override
@@ -44,7 +46,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         articleBinding.setArticle(article);
         initAuthorProfile();
         initSections();
-
 
         setSupportActionBar(articleBinding.articleToolbar.toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -81,22 +82,13 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                 });
     }
 
-    private void initMenuButton(int articleId) {
-        Menu menu = articleBinding.articleToolbar.toolbar.getMenu();
-        MenuItem itemLike = menu.getItem(0);
-        // 处理点赞、收藏按钮
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.tool_menu_article, menu);
+        MenuItem likeItem = menu.getItem(0);
+        likeItem.setIcon(article.isHasLike() ? R.drawable.ic_like_24dp : R.drawable.ic_like_border_24dp);
         MenuItem starItem = menu.getItem(1);
-        starArticleController.hasStar(article.getId())
-                .as(RxLife.asOnMain(this))
-                .subscribe(isStar -> {
-                    starItem.setIcon(isStar ? R.drawable.ic_favorite_24dp : R.drawable.ic_favorite_border_24dp);
-                    this.isStar = isStar;
-                }, (OnError) error -> error.show(error.getErrorMsg()));
+        starItem.setIcon(article.isHasStar() ? R.drawable.ic_favorite_24dp : R.drawable.ic_favorite_border_24dp);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -106,35 +98,12 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
             case android.R.id.home:
                 article = null;
                 finish();
+                break;
             case R.id.item_like_article:
-                if (isLike) {
-                    item.setIcon(R.drawable.ic_like_border_24dp);
-                    isLike = false;
-                } else {
-                    item.setIcon(R.drawable.ic_like_24dp);
-                    isLike = true;
-                }
+                LikeUtils.handle(likeArticleController, article, item, articleBinding.getRoot());
                 break;
             case R.id.item_star_article:
-                if (isStar) {
-                    starArticleController.unstar(article.getId())
-                            .as(RxLife.asOnMain(this))
-                            .subscribe(starCount -> {
-                                article.setStars(starCount);
-                                item.setIcon(R.drawable.ic_favorite_border_24dp);
-                                isStar = false;
-                                Tip.show("取消收藏成功");
-                            }, (OnError) error -> error.show(error.getErrorMsg()));
-                } else {
-                    starArticleController.star(article.getId())
-                            .as(RxLife.asOnMain(this))
-                            .subscribe(starCount -> {
-                                article.setStars(starCount);
-                                item.setIcon(R.drawable.ic_favorite_24dp);
-                                isStar = true;
-                                Tip.show("收藏成功");
-                            }, (OnError) error -> error.show(error.getErrorMsg()));
-                }
+                StarUtils.handle(starArticleController,article,item,articleBinding.getRoot());
                 break;
             default:
                 break;
@@ -175,5 +144,4 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
     }
-
 }

@@ -44,4 +44,11 @@ public class ArticleServiceImpl implements IArticleServiceImpl {
                 .add("type",type)
                 .asResponseList(Article.class);
     }
+
+    @Override
+    public Observable<String> visitArticle(int articleId) {
+        return RxHttp.postForm("/article/visit")
+                .add("articleId", articleId)
+                .asString();
+    }
 }
