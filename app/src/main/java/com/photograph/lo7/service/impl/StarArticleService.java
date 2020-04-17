@@ -10,39 +10,36 @@ import rxhttp.wrapper.param.RxHttp;
 
 public class StarArticleService implements IStarService {
     @Override
-    public Observable<Integer> star(Integer userId, Integer articleId) {
-        return RxHttp.postForm("/sa/star_article")
-                .add("userId", userId)
+    public Observable<Integer> star( Integer articleId) {
+        return RxHttp.postForm("sa/star_article")
                 .add("articleId", articleId)
                 .asResponse(Integer.class);
     }
 
     @Override
-    public Observable<Integer> unstar(Integer userId, Integer articleId) {
-        return RxHttp.deleteForm("/sa/unstar_article")
-                .add("userId", userId)
+    public Observable<Integer> unstar(Integer articleId) {
+        return RxHttp.postForm("sa/unstar_article")
                 .add("articleId", articleId)
                 .asResponse(Integer.class);
     }
 
     @Override
-    public Observable<Boolean> hasStar(Integer userId, Integer articleId) {
-        return RxHttp.get("/sa/has_star_article")
-                .add("userId", userId)
+    public Observable<Boolean> hasStar(Integer articleId) {
+        return RxHttp.get("sa/has_star_article")
                 .add("articleId", articleId)
                 .asResponse(Boolean.class);
     }
 
     @Override
     public Observable<Integer> getStarCountOfObject(Integer articleId) {
-        return RxHttp.get("/sa/article_star_count")
+        return RxHttp.get("sa/article_star_count")
                 .add("articleId", articleId)
                 .asResponse(Integer.class);
     }
 
     @Override
     public Observable<Integer> getStarCountOfUser(Integer userId) {
-        return RxHttp.get("/sa/user_star_count")
+        return RxHttp.get("sa/user_star_count")
                 .add("userId", userId)
                 .asResponse(Integer.class);
     }
@@ -53,6 +50,4 @@ public class StarArticleService implements IStarService {
                 .add("userId", userId)
                 .asResponseList(clazz);
     }
-
-
 }

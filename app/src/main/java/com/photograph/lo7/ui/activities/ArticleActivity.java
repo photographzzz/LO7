@@ -15,6 +15,7 @@ import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.SectionAdapter;
 import com.photograph.lo7.controller.FollowerController;
+import com.photograph.lo7.controller.IStarController;
 import com.photograph.lo7.controller.SectionController;
 import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.ActivityArticleBinding;
@@ -32,6 +33,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     private boolean isStar;
     private Friend author;
     private Article article = AppHolder.currentArticle;
+    private IStarController starArticleController = IStarController.getStarArticleController();
 
 
     @Override
@@ -85,10 +87,16 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         // 处理点赞、收藏按钮
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.tool_menu_article, menu);
+        MenuItem starItem = menu.getItem(1);
+        starArticleController.hasStar(article.getId())
+                .as(RxLife.asOnMain(this))
+                .subscribe(isStar -> {
+                    starItem.setIcon(isStar ? R.drawable.ic_favorite_24dp : R.drawable.ic_favorite_border_24dp);
+                    this.isStar = isStar;
+                }, (OnError) error -> error.show(error.getErrorMsg()));
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -109,11 +117,23 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.item_star_article:
                 if (isStar) {
-                    item.setIcon(R.drawable.ic_favorite_border_24dp);
-                    isStar = false;
+                    starArticleController.unstar(article.getId())
+                            .as(RxLife.asOnMain(this))
+                            .subscribe(starCount -> {
+                                article.setStars(starCount);
+                                item.setIcon(R.drawable.ic_favorite_border_24dp);
+                                isStar = false;
+                                Tip.show("取消收藏成功");
+                            }, (OnError) error -> error.show(error.getErrorMsg()));
                 } else {
-                    item.setIcon(R.drawable.ic_favorite_24dp);
-                    isStar = true;
+                    starArticleController.star(article.getId())
+                            .as(RxLife.asOnMain(this))
+                            .subscribe(starCount -> {
+                                article.setStars(starCount);
+                                item.setIcon(R.drawable.ic_favorite_24dp);
+                                isStar = true;
+                                Tip.show("收藏成功");
+                            }, (OnError) error -> error.show(error.getErrorMsg()));
                 }
                 break;
             default:
@@ -121,7 +141,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -132,7 +151,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    public class  Presenter{
+    public class Presenter {
         public void onClickFollowButton(int friendId, boolean isFollow) {
             if (isFollow) {
                 FollowerController.getInstance().unfollow(friendId)
@@ -143,12 +162,12 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                             AppHolder.currentUser.setFollowCount(followCount);
                             Tip.show("取消关注成功！");
                         }, (OnError) error -> error.show(error.getErrorMsg()));
-            }else {
+            } else {
                 FollowerController.getInstance().follow(friendId)
                         .as(RxLife.asOnMain(articleBinding.getRoot()))
                         .subscribe(followCount -> {
                             author.setHasBeenFollowed(true);
-                            author.setFollowerCount(author.getFollowerCount()  + 1);
+                            author.setFollowerCount(author.getFollowerCount() + 1);
                             AppHolder.currentUser.setFollowCount(followCount);
                             Tip.show("关注成功！");
                         }, (OnError) error -> error.show(error.getErrorMsg()));

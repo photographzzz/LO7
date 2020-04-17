@@ -8,12 +8,12 @@ import io.reactivex.Observable;
 
 public interface IStarService {
     // 收藏文章，返回文章收藏数
-    public Observable<Integer> star(Integer userId, Integer objectId);
+    public Observable<Integer> star( Integer objectId);
 
-    public Observable<Integer> unstar(Integer userId, Integer objectId);
+    public Observable<Integer> unstar(Integer objectId);
 
     // 判断是否收藏文章，返回收藏与否
-    public Observable<Boolean> hasStar(Integer userId, Integer objectId);
+    public Observable<Boolean> hasStar( Integer objectId);
 
     public Observable<Integer> getStarCountOfObject(Integer objectId);
 
