@@ -10,6 +10,8 @@ public class Visitable extends BaseObservable {
 
     private Integer authorId;
 
+    private String title;
+
     private Integer visitCount;
 
     private Integer commentCount;
@@ -40,6 +42,14 @@ public class Visitable extends BaseObservable {
 
     public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Bindable

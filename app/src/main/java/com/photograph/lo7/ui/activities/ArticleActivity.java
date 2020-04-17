@@ -14,16 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.SectionAdapter;
-import com.photograph.lo7.controller.FollowerController;
 import com.photograph.lo7.controller.ILikeController;
 import com.photograph.lo7.controller.IStarController;
 import com.photograph.lo7.controller.SectionController;
 import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.ActivityArticleBinding;
-import com.photograph.lo7.entity.Article;
 import com.photograph.lo7.entity.Friend;
+import com.photograph.lo7.entity.Visitable;
 import com.photograph.lo7.httpsender.OnError;
-import com.photograph.lo7.httpsender.Tip;
+import com.photograph.lo7.presenter.FollowerPresenter;
 import com.photograph.lo7.util.LikeUtils;
 import com.photograph.lo7.util.SpaceItemDecoration;
 import com.photograph.lo7.util.StarUtils;
@@ -32,8 +31,7 @@ import com.rxjava.rxlife.RxLife;
 public class ArticleActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityArticleBinding articleBinding;
     private RecyclerView recyclerView;
-    private Friend author;
-    private Article article = AppHolder.currentArticle;
+    private Visitable article = AppHolder.currentArticle;
     private IStarController starArticleController = IStarController.getStarArticleController();
     private ILikeController likeArticleController = ILikeController.getLikeArticleController();
 
@@ -42,7 +40,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         articleBinding = DataBindingUtil.setContentView(this, R.layout.activity_article);
-        articleBinding.articleAuthorBasicProfile.setUser(AppHolder.currentUser);
+        articleBinding.articleHeadView.setUser(AppHolder.currentUser);
         articleBinding.setArticle(article);
         initAuthorProfile();
         initSections();
@@ -57,7 +55,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
 
-        Presenter presenter = new Presenter();
+        FollowerPresenter presenter = new Presenter();
         articleBinding.setPresenter(presenter);
     }
 
@@ -65,7 +63,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         UserController.getInstance().getFriendProfile(article.getAuthorId())
                 .as(RxLife.asOnMain(this))
                 .subscribe(author -> {
-                    this.author = author;
                     articleBinding.setFriend(author);
                 }, (OnError) error -> {
                     error.show(error.getErrorMsg());
@@ -103,7 +100,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                 LikeUtils.handle(likeArticleController, article, item, articleBinding.getRoot());
                 break;
             case R.id.item_star_article:
-                StarUtils.handle(starArticleController,article,item,articleBinding.getRoot());
+                StarUtils.handle(starArticleController, article, item, articleBinding.getRoot());
                 break;
             default:
                 break;
@@ -119,29 +116,10 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
-    public class Presenter {
-        public void onClickFollowButton(int friendId, boolean isFollow) {
-            if (isFollow) {
-                FollowerController.getInstance().unfollow(friendId)
-                        .as(RxLife.asOnMain(articleBinding.getRoot()))
-                        .subscribe(followCount -> {
-                            author.setHasBeenFollowed(false);
-                            author.setFollowerCount(author.getFollowerCount() - 1);
-                            AppHolder.currentUser.setFollowCount(followCount);
-                            Tip.show("取消关注成功！");
-                        }, (OnError) error -> error.show(error.getErrorMsg()));
-            } else {
-                FollowerController.getInstance().follow(friendId)
-                        .as(RxLife.asOnMain(articleBinding.getRoot()))
-                        .subscribe(followCount -> {
-                            author.setHasBeenFollowed(true);
-                            author.setFollowerCount(author.getFollowerCount() + 1);
-                            AppHolder.currentUser.setFollowCount(followCount);
-                            Tip.show("关注成功！");
-                        }, (OnError) error -> error.show(error.getErrorMsg()));
-
-            }
+    public class Presenter extends FollowerPresenter {
+        @Override
+        public void onClickFollowButton(Friend friend) {
+            super.onClickFollowButton(friend, articleBinding.getRoot());
         }
     }
 }

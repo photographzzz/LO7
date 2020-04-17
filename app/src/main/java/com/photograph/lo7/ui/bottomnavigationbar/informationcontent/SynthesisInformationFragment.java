@@ -15,19 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.ArticleAdapter;
 import com.photograph.lo7.controller.ArticleController;
-import com.photograph.lo7.databinding.FragmentInformationSynthesisBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.util.SpaceItemDecoration;
 import com.rxjava.rxlife.RxLife;
 
 public class SynthesisInformationFragment extends Fragment {
-    private FragmentInformationSynthesisBinding synthesisBinding;
-
-
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        synthesisBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_synthesis, container, false);
+        com.photograph.lo7.databinding.FragmentInformationSynthesisBinding synthesisBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_synthesis, container, false);
         RecyclerView recyclerView = synthesisBinding.synthesisArticleRecyclerview;
 
 
@@ -42,12 +37,8 @@ public class SynthesisInformationFragment extends Fragment {
                 }, (OnError) error -> {
                     error.show(error.getErrorMsg());
                 });
-
-
         return synthesisBinding.getRoot();
     }
-
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

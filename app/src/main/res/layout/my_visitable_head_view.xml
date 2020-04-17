@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.photograph.lo7.entity.User" />
+
+        <variable
+            name="visitable"
+            type="com.photograph.lo7.entity.Visitable" />
+
+        <variable
+            name="friend"
+            type="com.photograph.lo7.entity.Friend" />
+
+        <variable
+            name="presenter"
+            type="com.photograph.lo7.presenter.FollowerPresenter" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{visitable.title}"
+            android:textSize="27sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{visitable.absoluteDate+`  ·  `+ visitable.visitCount+`阅读  ·  ` + visitable.likes+`点赞  ·  ` +visitable.stars +`收藏`}"
+            android:textSize="10sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/friend_pic_cirimg"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                bind:friend_pic="@{friend.pic}" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_toEndOf="@id/friend_pic_cirimg"
+                android:layout_toRightOf="@id/friend_pic_cirimg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/author_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@{friend.username}" />
+
+                <TextView
+                    android:id="@+id/author_follow_count_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@{String.valueOf(friend.followCount)+`关注  ·  `+String.valueOf(friend.followerCount)+`粉丝`}" />
+            </LinearLayout>
+
+
+            <ImageButton
+                android:id="@+id/follow_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:onClick="@{() -> presenter.onClickFollowButton(friend)}"
+                android:visibility="@{user.id == friend.id ? View.GONE : View.VISIBLE }"
+                bind:follow_btn_img="@{friend.hasBeenFollowed}" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

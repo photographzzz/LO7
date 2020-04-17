@@ -10,9 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/version_article_recyclerview"
+            android:id="@+id/playing_article_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"

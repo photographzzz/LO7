@@ -15,23 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.ArticleAdapter;
 import com.photograph.lo7.controller.ArticleController;
-import com.photograph.lo7.databinding.FragmentInformationMatchBinding;
+import com.photograph.lo7.databinding.FragmentInformationStrategyBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.util.SpaceItemDecoration;
 import com.rxjava.rxlife.RxLife;
 
-public class MatchInformationFragment extends Fragment {
+public class StrategyInformationFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentInformationMatchBinding matchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_match, container, false);
-        RecyclerView recyclerView = matchBinding.matchArticleRecyclerview;
+        FragmentInformationStrategyBinding strategyBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_strategy, container, false);
+        RecyclerView recyclerView = strategyBinding.playingArticleRecyclerview;
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
-        ArticleController.getInstance().getMatchArticles()
+        ArticleController.getInstance().getStrategyArticles()
                 .as(RxLife.asOnMain(this))
                 .subscribe(articles -> {
                     ArticleAdapter adapter = new ArticleAdapter(getContext(), articles);
@@ -39,11 +39,12 @@ public class MatchInformationFragment extends Fragment {
                 }, (OnError) error -> {
                     error.show(error.getErrorMsg());
                 });
-        return matchBinding.getRoot();
+        return strategyBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
 }

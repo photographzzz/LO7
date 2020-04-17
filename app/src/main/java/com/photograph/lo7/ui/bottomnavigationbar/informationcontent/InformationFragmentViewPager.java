@@ -24,7 +24,7 @@ public class InformationFragmentViewPager extends FragmentPagerAdapter {
         } else if (i == 2) {
             return new VersionInformationFragment();
         } else if (i == 3) {
-            return new PlayingInformationFragment();
+            return new StrategyInformationFragment();
         }
         return new SynthesisInformationFragment();
     }

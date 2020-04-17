@@ -64,7 +64,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_alignParentRight="true"
             bind:follow_btn_img = "@{friend.hasBeenFollowed}"
-            android:onClick="@{() -> presenter.onClickFollowButton(friend.id, friend.hasBeenFollowed)}"
+            android:onClick="@{() -> presenter.onClickFollowButton(friend)}"
             android:visibility="@{user.id == friend.id ? View.GONE : View.VISIBLE }"/>
 
 
