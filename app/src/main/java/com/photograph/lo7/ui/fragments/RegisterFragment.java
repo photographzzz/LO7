@@ -47,7 +47,7 @@ public class RegisterFragment extends Fragment {
             String email = emailText.getText().toString();
             String phone = phoneText.getText().toString();
 
-            UserController.getInstance().register(username, password, gender, email, phone)
+            UserController.INSTANCE.register(username, password, gender, email, phone)
                     .as(RxLife.asOnMain(this))
                     .subscribe(user -> {
                         AppHolder.currentUser = user;

@@ -35,13 +35,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ItemArticleBinding binding = holder.binding;
-        binding.setArticle(articles.get(position));
-        binding.executePendingBindings();
-        binding.getRoot().setOnClickListener(v -> {
+        ItemArticleBinding articleBinding = holder.binding;
+        articleBinding.setArticle(articles.get(position));
+        articleBinding.executePendingBindings();
+        articleBinding.getRoot().setOnClickListener(v -> {
             Article article = articles.get(position);
             AppHolder.currentArticle = article;
-            ArticleController.getInstance().visitArticle(article.getId())
+            ArticleController.INSTANCE.visitArticle(article.getId())
                     .as(RxLife.asOnMain(holder.itemView.getRootView()))
                     .subscribe(success -> {
                         article.setVisitCount(article.getVisitCount() + 1);

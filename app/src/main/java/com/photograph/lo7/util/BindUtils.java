@@ -17,6 +17,7 @@ public class BindUtils {
     // 与HomeActivity的侧拉导航栏头部CircleImageView保持绑定，当用户pic字段变化时，自动刷新头像
     @BindingAdapter({"urlCirImg"})
     public static void loadImage(CircleImageView view, String src) {
+        if(src==null) return;
         Glide.with(view.getContext()).load(Uri.parse(src.replace("http://image.LO7.com/", Url.imageHost)))
                 .error(R.drawable.nav_icon)
                 .centerCrop()
@@ -44,7 +45,7 @@ public class BindUtils {
                 .into(view);
     }
 
-    @BindingAdapter({"friend_pic"})
+    @BindingAdapter({"authorCirImg"})
     public static void loadFriendPic(CircleImageView view, String src) {
         if (!TextUtils.isEmpty(src)) {
             Glide.with(view.getContext()).load(Uri.parse(src.replace("http://image.LO7.com/", Url.imageHost)))
@@ -57,5 +58,11 @@ public class BindUtils {
     public static void loadFollowButton(ImageButton view, boolean hasBennFollowed) {
         Glide.with(view).load(view.getContext().getResources()
                 .getDrawable(hasBennFollowed ? R.drawable.ic_follow_checked : R.drawable.ic_follow)).into(view);
+    }
+
+    @BindingAdapter("commentLikeBtn")
+    public static void loadCommentLikeBtn(ImageButton view, boolean hasLike) {
+        Glide.with(view).load(view.getContext().getResources()
+                .getDrawable(hasLike ? R.drawable.ic_like_24dp : R.drawable.ic_like_border_24dp)).into(view);
     }
 }

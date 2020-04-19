@@ -3,6 +3,8 @@ package com.photograph.lo7.service;
 import com.photograph.lo7.entity.Friend;
 import com.photograph.lo7.entity.User;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
 public interface IUserService {
@@ -23,6 +25,7 @@ public interface IUserService {
     public Observable resetPassword(String password);
 
     public Observable<Friend> getFriendProfile(int friendId);
+    public Observable<List<Friend>> getMultiFriendProfile(List<Integer> friendIds);
 
     public void exit();
 }

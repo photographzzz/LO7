@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="user"
+            type="com.photograph.lo7.entity.User" />
+
+        <variable
+            name="commentPresenter"
+            type="com.photograph.lo7.presenter.CommentPresenter" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/comment_floating_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:elevation="8dp"
+            android:src="@drawable/ic_done"/>
+        <!-- end 和系统语言相关     elevation 悬浮高度 -->
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

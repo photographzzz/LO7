@@ -6,20 +6,10 @@ import com.photograph.lo7.service.impl.LikeArticleServiceImpl;
 
 import io.reactivex.Observable;
 
-public class LikeArticleController implements ILikeController {
-    private ILikeService likeArticleService;
+public enum LikeArticleController implements ILikeController {
+    INSTANCE;
 
-    private LikeArticleController() {
-        likeArticleService = new LikeArticleServiceImpl();
-    }
-
-    public static LikeArticleController getInstance() {
-        return LikeArticleController.Inner.instance;
-    }
-
-    private static class Inner {
-        private static final LikeArticleController instance = new LikeArticleController();
-    }
+    private ILikeService likeArticleService = new LikeArticleServiceImpl();
 
     @Override
     public Observable<Integer> like(Integer articleId) {

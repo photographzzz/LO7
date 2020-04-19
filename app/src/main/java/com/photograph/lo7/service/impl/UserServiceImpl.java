@@ -1,8 +1,11 @@
 package com.photograph.lo7.service.impl;
 
+import com.google.gson.Gson;
 import com.photograph.lo7.entity.Friend;
 import com.photograph.lo7.entity.User;
 import com.photograph.lo7.service.IUserService;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import rxhttp.wrapper.param.RxHttp;
@@ -74,10 +77,17 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Observable<Friend> getFriendProfile(int friendId) {
-        return RxHttp.get("/user/friend_profile")
+        return RxHttp.get("/user/friend")
                 .add("friendId", friendId)
                 .asResponse(Friend.class);
 
+    }
+
+    @Override
+    public Observable<List<Friend>> getMultiFriendProfile(List<Integer> friendIds) {
+        return RxHttp.postJson("user/multi_friend")
+                .addAll(new Gson().toJson(friendIds))
+                .asResponseList(Friend.class);
     }
 
     @Override

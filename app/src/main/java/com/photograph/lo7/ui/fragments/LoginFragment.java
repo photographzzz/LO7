@@ -1,6 +1,5 @@
 package com.photograph.lo7.ui.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +45,7 @@ public class LoginFragment extends Fragment {
             String username = usernameText.getText().toString();
             String password = passwordText.getText().toString();
 
-            UserController.getInstance().login(username, password)
+            UserController.INSTANCE.login(username, password)
                     .as(RxLife.asOnMain(this))
                     .subscribe(user -> {
                         AppHolder.currentUser = user;

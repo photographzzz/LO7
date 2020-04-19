@@ -8,20 +8,10 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public class SectionController {
-    ISectionService sectionService;
+public enum SectionController {
+    INSTANCE;
+    private ISectionService sectionService = new SectionServiceImpl();
 
-    private SectionController() {
-        sectionService = new SectionServiceImpl();
-    }
-
-    public static SectionController getInstance() {
-        return SectionController.Inner.instance;
-    }
-
-    private static class Inner {
-        private static final SectionController instance = new SectionController();
-    }
     public Observable<List<Section>> getAllSection(int articleId) {
         return sectionService.getAllSection(articleId);
     }

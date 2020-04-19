@@ -6,7 +6,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public interface IArticleServiceImpl {
+public interface IArticleService {
 
     public Observable<Article> getArticleById(int articleId);
 

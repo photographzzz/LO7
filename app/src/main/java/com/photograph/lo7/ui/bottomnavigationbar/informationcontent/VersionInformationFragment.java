@@ -32,7 +32,7 @@ public class VersionInformationFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
-        ArticleController.getInstance().getVersionArticles()
+        ArticleController.INSTANCE.getVersionArticles()
                 .as(RxLife.asOnMain(this))
                 .subscribe(articles -> {
                     ArticleAdapter adapter = new ArticleAdapter(getContext(), articles);

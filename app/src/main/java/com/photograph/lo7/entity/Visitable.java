@@ -20,13 +20,21 @@ public class Visitable extends BaseObservable {
 
     private Integer likes;
 
+    // 相对时间，如"一分钟前"、"昨天"等
     private String relativeDate;
 
+    // 绝对时间
     private String absoluteDate;
 
-    private boolean hasStar;
+    private Boolean hasStar;
 
-    private boolean hasLike;
+    private Boolean hasLike;
+
+    private String authorName;
+    private String authorPic;
+    private Integer authorFollowCount;
+    private Integer authorFollowerCount;
+    private Boolean authorHasBeenFollowed;
 
     public Integer getId() {
         return id;
@@ -52,44 +60,36 @@ public class Visitable extends BaseObservable {
         this.title = title;
     }
 
-    @Bindable
     public Integer getVisitCount() {
         return visitCount;
     }
 
     public void setVisitCount(Integer visitCount) {
         this.visitCount = visitCount;
-        notifyPropertyChanged(BR.visitCount);
     }
 
-    @Bindable
     public Integer getCommentCount() {
         return commentCount;
     }
 
     public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
-        notifyPropertyChanged(BR.commentCount);
     }
 
-    @Bindable
     public Integer getStars() {
         return stars;
     }
 
     public void setStars(Integer stars) {
         this.stars = stars;
-        notifyPropertyChanged(BR.stars);
     }
 
-    @Bindable
     public Integer getLikes() {
         return likes;
     }
 
     public void setLikes(Integer likes) {
         this.likes = likes;
-        notifyPropertyChanged(BR.likes);
     }
 
     public String getRelativeDate() {
@@ -108,24 +108,59 @@ public class Visitable extends BaseObservable {
         this.absoluteDate = absoluteDate;
     }
 
-
-    @Bindable
-    public boolean isHasStar() {
+    public Boolean getHasStar() {
         return hasStar;
     }
 
-    public void setHasStar(boolean hasStar) {
+    public void setHasStar(Boolean hasStar) {
         this.hasStar = hasStar;
-        notifyPropertyChanged(BR.hasStar);
     }
 
-    @Bindable
-    public boolean isHasLike() {
+    public Boolean getHasLike() {
         return hasLike;
     }
 
-    public void setHasLike(boolean hasLike) {
+    public void setHasLike(Boolean hasLike) {
         this.hasLike = hasLike;
-        notifyPropertyChanged(BR.hasLike);
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorPic() {
+        return authorPic;
+    }
+
+    public void setAuthorPic(String authorPic) {
+        this.authorPic = authorPic;
+    }
+
+    public Integer getAuthorFollowCount() {
+        return authorFollowCount;
+    }
+
+    public void setAuthorFollowCount(Integer authorFollowCount) {
+        this.authorFollowCount = authorFollowCount;
+    }
+
+    public Integer getAuthorFollowerCount() {
+        return authorFollowerCount;
+    }
+
+    public void setAuthorFollowerCount(Integer authorFollowerCount) {
+        this.authorFollowerCount = authorFollowerCount;
+    }
+
+    public Boolean getAuthorHasBeenFollowed() {
+        return authorHasBeenFollowed;
+    }
+
+    public void setAuthorHasBeenFollowed(Boolean authorHasBeenFollowed) {
+        this.authorHasBeenFollowed = authorHasBeenFollowed;
     }
 }

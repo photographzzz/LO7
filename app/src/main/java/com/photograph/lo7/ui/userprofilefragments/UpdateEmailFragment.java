@@ -62,7 +62,7 @@ public class UpdateEmailFragment extends Fragment implements MenuItem.OnMenuItem
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String email = updateEmailTxt.getText().toString();
-            UserController.getInstance().updateEmail(email)
+            UserController.INSTANCE.updateEmail(email)
                     .as(RxLife.asOnMain(this))
                     .subscribe(result ->{
                         user.setEmail(email);

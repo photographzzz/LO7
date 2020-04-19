@@ -19,9 +19,13 @@
             type="com.photograph.lo7.entity.Visitable" />
 
         <variable
-            name="presenter"
+            name="followerPresenter"
             type="com.photograph.lo7.presenter.FollowerPresenter" />
 
+
+        <variable
+            name="commentPresenter"
+            type="com.photograph.lo7.presenter.CommentPresenter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -41,24 +45,40 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants"
                 android:orientation="vertical">
 
-                <include
-                    android:id="@+id/article_head_view"
-                    layout="@layout/my_visitable_head_view"
-                    bind:user="@{user}"
-                    bind:friend="@{friend}"
-                    bind:visitable="@{article}"
-                    bind:presenter="@{presenter}"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/article_head_view"
+                        layout="@layout/my_visitable_head_view"
+                        bind:friend="@{friend}"
+                        bind:followerPresenter="@{followerPresenter}"
+                        bind:user="@{user}"
+                        bind:visitable="@{article}" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sections_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/article_sections_recyclerview"
+                    android:id="@+id/comments_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp" />
 
-
+                <include
+                    android:id="@+id/article_comment_floating_btn"
+                    layout="@layout/my_comment_floating_btn"
+                    bind:commentPresenter="@{commentPresenter}"
+                    bind:user="@{user}"/>
             </LinearLayout>
 
 

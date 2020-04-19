@@ -66,7 +66,7 @@ public class UpdateGenderFragment extends Fragment implements MenuItem.OnMenuIte
         if (item.getItemId() == R.id.item_verify) {
             Integer gender = radioGroup.getCheckedRadioButtonId() == R.id.male_rb ? 0 : 1;
 
-            UserController.getInstance().updateGender(gender)
+            UserController.INSTANCE.updateGender(gender)
                     .as(RxLife.asOnMain(this))
                     .subscribe(result ->{
                         user.setGender(gender);

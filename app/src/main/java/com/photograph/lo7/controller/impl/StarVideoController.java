@@ -9,20 +9,9 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public class StarVideoController implements IStarController {
-    private IStarService starArticleService;
-
-    private StarVideoController() {
-        starArticleService = new StarArticleService();
-    }
-
-    public static StarVideoController getInstance() {
-        return StarVideoController.Inner.instance;
-    }
-
-    private static class Inner {
-        private static final StarVideoController instance = new StarVideoController();
-    }
+public enum StarVideoController implements IStarController {
+    INSTANCE;
+    private IStarService starArticleService = new StarArticleService();
 
     @Override
     public Observable<Integer> star(Integer articleId) {

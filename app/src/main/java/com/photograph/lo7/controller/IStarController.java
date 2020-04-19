@@ -11,15 +11,15 @@ import io.reactivex.Observable;
 
 public interface IStarController {
     public static IStarController getStarArticleController() {
-        return StarArticleController.getInstance();
+        return StarArticleController.INSTANCE;
     }
 
     public static IStarController getStarMomentController() {
-        return StarMomentController.getInstance();
+        return StarMomentController.INSTANCE;
     }
 
     public static IStarController getStarVideoController() {
-        return StarVideoController.getInstance();
+        return StarVideoController.INSTANCE;
     }
 
     public Observable<Integer> star(Integer objectId);

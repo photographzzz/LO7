@@ -5,22 +5,13 @@ import com.photograph.lo7.entity.User;
 import com.photograph.lo7.service.IUserService;
 import com.photograph.lo7.service.impl.UserServiceImpl;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
-public class UserController {
-    private IUserService userService;
-
-    private UserController() {
-        userService = new UserServiceImpl();
-    }
-
-    public static UserController getInstance() {
-        return Inner.instance;
-    }
-
-    private static class Inner {
-        private static final UserController instance = new UserController();
-    }
+public enum UserController {
+    INSTANCE;
+    private IUserService userService = new UserServiceImpl();
 
 
     public Observable<User> login(String username, String password) {
@@ -31,31 +22,35 @@ public class UserController {
         return userService.getFriendProfile(friendId);
     }
 
-    public Observable<User> register(String username, String password, Integer gender, String email, String phone){
+    public Observable<List<Friend>> getMultiFriendProfile(List<Integer> friendId) {
+        return userService.getMultiFriendProfile(friendId);
+    }
+
+    public Observable<User> register(String username, String password, Integer gender, String email, String phone) {
         return userService.register(username, password, gender, email, phone);
     }
 
-    public Observable<String> updateUsername(String username){
+    public Observable<String> updateUsername(String username) {
         return userService.updateUsername(username);
     }
 
-    public Observable<String> updateBio(String bio){
+    public Observable<String> updateBio(String bio) {
         return userService.updateBio(bio);
     }
 
-    public Observable<String> updateEmail(String email){
+    public Observable<String> updateEmail(String email) {
         return userService.updateEmail(email);
     }
 
-    public Observable<String> updatePhone(String phone){
+    public Observable<String> updatePhone(String phone) {
         return userService.updatePhone(phone);
     }
 
-    public Observable<Integer> updateGender(int gender){
+    public Observable<Integer> updateGender(int gender) {
         return userService.updateGender(gender);
     }
 
-    public Observable resetPassword(String password){
+    public Observable resetPassword(String password) {
         return userService.resetPassword(password);
     }
 }

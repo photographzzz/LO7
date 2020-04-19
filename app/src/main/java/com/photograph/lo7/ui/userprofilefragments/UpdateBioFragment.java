@@ -62,7 +62,7 @@ public class UpdateBioFragment extends Fragment implements MenuItem.OnMenuItemCl
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String bio = updateBioTxt.getText().toString();
-            UserController.getInstance().updateBio(bio)
+            UserController.INSTANCE.updateBio(bio)
                     .as(RxLife.asOnMain(this))
                     .subscribe(result ->{
                         user.setBio(bio);

@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 
 public interface ILikeController {
     public static ILikeController getLikeArticleController() {
-        return LikeArticleController.getInstance();
+        return LikeArticleController.INSTANCE;
     }
 
   /*  public static ILikeController getLikeMomentController() {

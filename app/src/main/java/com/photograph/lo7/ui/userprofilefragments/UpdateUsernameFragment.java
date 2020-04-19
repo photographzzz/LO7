@@ -62,7 +62,7 @@ public class UpdateUsernameFragment extends Fragment implements MenuItem.OnMenuI
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String username = updateUsernameTxt.getText().toString();
-            UserController.getInstance().updateUsername(username)
+            UserController.INSTANCE.updateUsername(username)
                     .as(RxLife.asOnMain(this))
                     .subscribe(result ->{
                         user.setUsername(username);

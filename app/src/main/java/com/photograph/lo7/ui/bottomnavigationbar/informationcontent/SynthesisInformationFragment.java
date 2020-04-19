@@ -29,7 +29,7 @@ public class SynthesisInformationFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
-        ArticleController.getInstance().getAllArticles()
+        ArticleController.INSTANCE.getAllArticles()
                 .as(RxLife.asOnMain(this))
                 .subscribe(articles -> {
                     ArticleAdapter adapter = new ArticleAdapter(getContext(), articles);

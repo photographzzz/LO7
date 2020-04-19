@@ -62,7 +62,7 @@ public class UpdatePhoneFragment extends Fragment implements MenuItem.OnMenuItem
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item_verify) {
             String phone = updatePhoneTxt.getText().toString();
-            UserController.getInstance().updatePhone(phone)
+            UserController.INSTANCE.updatePhone(phone)
                     .as(RxLife.asOnMain(this))
                     .subscribe(result ->{
                         user.setPhone(phone);

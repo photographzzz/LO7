@@ -16,7 +16,7 @@ public class FollowerPresenter {
 
     public void onClickFollowButton(Friend friend, View view) {
         if (friend.getHasBeenFollowed()) {
-            FollowerController.getInstance().unfollow(friend.getId())
+            FollowerController.INSTANCE.unfollow(friend.getId())
                     .as(RxLife.asOnMain(view))
                     .subscribe(followCount -> {
                         friend.setHasBeenFollowed(false);
@@ -25,7 +25,7 @@ public class FollowerPresenter {
                         Tip.show("取消关注成功！");
                     }, (OnError) error -> error.show(error.getErrorMsg()));
         } else {
-            FollowerController.getInstance().follow(friend.getId())
+            FollowerController.INSTANCE.follow(friend.getId())
                     .as(RxLife.asOnMain(view))
                     .subscribe(followCount -> {
                         friend.setHasBeenFollowed(true);

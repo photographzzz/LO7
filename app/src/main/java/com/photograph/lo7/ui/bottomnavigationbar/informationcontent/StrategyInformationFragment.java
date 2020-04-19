@@ -31,7 +31,7 @@ public class StrategyInformationFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
-        ArticleController.getInstance().getStrategyArticles()
+        ArticleController.INSTANCE.getStrategyArticles()
                 .as(RxLife.asOnMain(this))
                 .subscribe(articles -> {
                     ArticleAdapter adapter = new ArticleAdapter(getContext(), articles);

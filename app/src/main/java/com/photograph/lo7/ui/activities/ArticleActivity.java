@@ -1,11 +1,15 @@
 package com.photograph.lo7.ui.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,15 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
+import com.photograph.lo7.adapter.CommentAdapter;
 import com.photograph.lo7.adapter.SectionAdapter;
+import com.photograph.lo7.controller.ICommentController;
 import com.photograph.lo7.controller.ILikeController;
 import com.photograph.lo7.controller.IStarController;
 import com.photograph.lo7.controller.SectionController;
 import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.ActivityArticleBinding;
+import com.photograph.lo7.databinding.MyCommentLayoutBinding;
 import com.photograph.lo7.entity.Friend;
 import com.photograph.lo7.entity.Visitable;
 import com.photograph.lo7.httpsender.OnError;
+import com.photograph.lo7.presenter.CommentPresenter;
 import com.photograph.lo7.presenter.FollowerPresenter;
 import com.photograph.lo7.util.LikeUtils;
 import com.photograph.lo7.util.SpaceItemDecoration;
@@ -30,10 +38,14 @@ import com.rxjava.rxlife.RxLife;
 
 public class ArticleActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityArticleBinding articleBinding;
-    private RecyclerView recyclerView;
+    private RecyclerView sectionsRecyclerView;
+    private RecyclerView commentsRecyclerView;
     private Visitable article = AppHolder.currentArticle;
+    private CommentAdapter commentAdapter;
     private IStarController starArticleController = IStarController.getStarArticleController();
     private ILikeController likeArticleController = ILikeController.getLikeArticleController();
+    private SectionController sectionController = SectionController.INSTANCE;
+    private ICommentController commentArticleController = ICommentController.getCommentArticleController();
 
 
     @Override
@@ -44,23 +56,49 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         articleBinding.setArticle(article);
         initAuthorProfile();
         initSections();
+        initComments();
 
         setSupportActionBar(articleBinding.articleToolbar.toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
-        recyclerView = articleBinding.articleSectionsRecyclerview;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(10));
+        SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(10);
 
-        FollowerPresenter presenter = new Presenter();
-        articleBinding.setPresenter(presenter);
+        sectionsRecyclerView = articleBinding.sectionsRecyclerview;
+        sectionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        sectionsRecyclerView.addItemDecoration(spaceItemDecoration);
+
+        commentsRecyclerView = articleBinding.commentsRecyclerview;
+        commentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        commentsRecyclerView.addItemDecoration(spaceItemDecoration);
+        FollowerPresenter followerPresenter = new ArticleFollowerPresenter();
+        articleBinding.setFollowerPresenter(followerPresenter);
+        CommentPresenter commentPresenter = new ArticleCommentPresenter();
+        articleBinding.setCommentPresenter(commentPresenter);
+
+
+        articleBinding.articleCommentFloatingBtn.commentFloatingBtn.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(articleBinding.getRoot().getContext());
+            builder.setTitle("评论");
+            MyCommentLayoutBinding commentLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(articleBinding.getRoot().getContext()), R.layout.my_comment_layout, null,false);
+            builder.setView(commentLayoutBinding.getRoot());
+            final EditText commentEdit = commentLayoutBinding.commentEdit;
+            builder.setPositiveButton("发送", (dialog, which) -> {
+                String content = commentEdit.getText().toString().trim();
+                int articleId = article.getId();
+                new CommentPresenter().onClickComment(articleId,AppHolder.currentUser.getId(),content,commentAdapter,articleBinding.getRoot());
+            });
+
+            builder.setNegativeButton("取消", (dialog, which) -> {
+                dialog.cancel();
+            });
+            builder.show();
+        });
     }
 
     private void initAuthorProfile() {
-        UserController.getInstance().getFriendProfile(article.getAuthorId())
+        UserController.INSTANCE.getFriendProfile(article.getAuthorId())
                 .as(RxLife.asOnMain(this))
                 .subscribe(author -> {
                     articleBinding.setFriend(author);
@@ -70,10 +108,21 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initSections() {
-        SectionController.getInstance().getAllSection(article.getId())
+        sectionController.getAllSection(article.getId())
                 .as(RxLife.asOnMain(this))
                 .subscribe(sections -> {
-                    recyclerView.setAdapter(new SectionAdapter(this, sections));
+                    sectionsRecyclerView.setAdapter(new SectionAdapter(this, sections));
+                }, (OnError) error -> {
+                    error.show(error.getErrorMsg());
+                });
+    }
+
+    private void initComments() {
+        commentArticleController.getCommentsByVisitableId(article.getId())
+                .as(RxLife.asOnMain(this))
+                .subscribe(comments -> {
+                    commentAdapter = new CommentAdapter(this, comments);
+                    commentsRecyclerView.setAdapter(commentAdapter);
                 }, (OnError) error -> {
                     error.show(error.getErrorMsg());
                 });
@@ -116,10 +165,32 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public class Presenter extends FollowerPresenter {
+
+    public class ArticleFollowerPresenter extends FollowerPresenter {
         @Override
         public void onClickFollowButton(Friend friend) {
             super.onClickFollowButton(friend, articleBinding.getRoot());
+        }
+    }
+
+    public class ArticleCommentPresenter extends CommentPresenter{
+        @Override
+        public void onClickComment(View view ,Integer userId) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setTitle("评论");
+            MyCommentLayoutBinding commentLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(articleBinding.getRoot().getContext()), R.layout.my_comment_layout, null,false);
+            builder.setView(commentLayoutBinding.getRoot());
+            final EditText commentEdit = commentLayoutBinding.commentEdit;
+            builder.setPositiveButton("发送", (dialog, which) -> {
+                String content = commentEdit.getText().toString().trim();
+                int articleId = article.getId();
+                ArticleCommentPresenter.super.onClickComment(articleId,userId,content,commentAdapter,articleBinding.getRoot());
+            });
+
+            builder.setNegativeButton("取消", (dialog, which) -> {
+                dialog.cancel();
+            });
+            builder.show();
         }
     }
 }

@@ -2,14 +2,14 @@ package com.photograph.lo7.service.impl;
 
 import com.photograph.lo7.common.ArticleConst;
 import com.photograph.lo7.entity.Article;
-import com.photograph.lo7.service.IArticleServiceImpl;
+import com.photograph.lo7.service.IArticleService;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import rxhttp.wrapper.param.RxHttp;
 
-public class ArticleServiceImpl implements IArticleServiceImpl {
+public class ArticleService implements IArticleService {
     @Override
     public Observable<Article> getArticleById(int articleId) {
         return RxHttp.get("/article/article_id")
