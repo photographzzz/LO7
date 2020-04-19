@@ -17,14 +17,14 @@ public interface ILikeController {
         return LikeVideoController.getInstance();
     }
 */
-    public Observable<Integer> like(Integer objectId);
+    public Observable<Integer> like(Integer visitableId);
 
-    public Observable<Integer> unlike(Integer objectId);
+    public Observable<Integer> unlike(Integer visitableId);
 
     // 判断是否收藏文章，返回收藏与否
-    public Observable<Boolean> hasLike(Integer objectId);
+    public Observable<Boolean> hasLike(Integer visitableId);
 
-    public Observable<Integer> getLikeCountOfObject(Integer objectId);
+    public Observable<Integer> getLikeCountOfVisitable(Integer visitableId);
 
     public Observable<Integer> getLikeCountOfUser(Integer userId);
 

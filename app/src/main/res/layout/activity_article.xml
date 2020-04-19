@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="article"
-            type="com.photograph.lo7.entity.Visitable" />
+
+        <import type="com.photograph.lo7.AppHolder" />
 
         <variable
             name="followerPresenter"
@@ -48,7 +47,7 @@
                         android:id="@+id/article_head_view"
                         layout="@layout/my_visitable_head_view"
                         bind:followerPresenter="@{followerPresenter}"
-                        bind:visitable="@{article}" />
+                        bind:visitable="@{AppHolder.currentArticle}" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/sections_recyclerview"

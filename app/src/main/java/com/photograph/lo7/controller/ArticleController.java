@@ -1,39 +1,47 @@
 package com.photograph.lo7.controller;
 
+import com.photograph.lo7.common.ArticleConst;
 import com.photograph.lo7.entity.Article;
-import com.photograph.lo7.service.IArticleService;
-import com.photograph.lo7.service.impl.ArticleService;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import rxhttp.wrapper.param.RxHttp;
 
 public enum ArticleController {
     INSTANCE;
 
-    private IArticleService articleService = new ArticleService();
-
     public Observable<List<Article>> getAllArticles() {
-        return articleService.getAllArticles();
+        return RxHttp.get("/article/all")
+                .asResponseList(Article.class);
     }
 
     public Observable<Article> getArticleById(int articleId) {
-        return articleService.getArticleById(articleId);
+        return RxHttp.get("/article/article_id")
+                .add("articleId", articleId)
+                .asResponse(Article.class);
     }
 
     public Observable<List<Article>> getVersionArticles() {
-        return articleService.getVersionArticles();
+        return getArticlesByType(ArticleConst.VERSION);
     }
 
     public Observable<List<Article>> getMatchArticles() {
-        return articleService.getMatchArticles();
+        return getArticlesByType(ArticleConst.MATCH);
+    }
+    public Observable<List<Article>> getStrategyArticles() {
+        return getArticlesByType(ArticleConst.STRATEGY);
     }
 
-    public Observable<List<Article>> getStrategyArticles() {
-        return articleService.getStrategyArticles();
+    public Observable<List<Article>> getArticlesByType(int type) {
+        return RxHttp.get("/article/type")
+                .add("type",type)
+                .asResponseList(Article.class);
     }
 
     public Observable<String> visitArticle(int articleId) {
-        return articleService.visitArticle(articleId);
+        return RxHttp.postForm("/article/visit")
+                .add("articleId", articleId)
+                .asString();
     }
 }

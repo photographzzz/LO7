@@ -22,16 +22,16 @@ public interface IStarController {
         return StarVideoController.INSTANCE;
     }
 
-    public Observable<Integer> star(Integer objectId);
+    public Observable<Integer> star(Integer visitableId);
 
-    public Observable<Integer> unstar(Integer objectId);
+    public Observable<Integer> unstar(Integer visitableId);
 
     // 判断是否收藏文章，返回收藏与否
-    public Observable<Boolean> hasStar( Integer objectId);
+    public Observable<Boolean> hasStar( Integer visitableId);
 
-    public Observable<Integer> getStarCountOfObject(Integer objectId);
+    public Observable<Integer> getStarCountOfVisitable(Integer visitableId);
 
     public Observable<Integer> getStarCountOfUser(Integer userId);
 
-    public <E extends Visitable> Observable<List<E>> getAllStarObjectOfUser(Integer userId, Class<E> clazz);
+    public <E extends Visitable> Observable<List<E>> getAllStarVisitableOfUser(Integer userId, Class<E> clazz);
 }

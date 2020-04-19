@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <import type="com.photograph.lo7.AppHolder" />
+        <variable
+            name="visitable"
+            type="com.photograph.lo7.entity.Visitable" />
 
         <variable
             name="commentPresenter"
@@ -20,7 +22,8 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:elevation="8dp"
-            android:src="@drawable/ic_done"/>
+            android:src="@drawable/ic_done"
+            android:onClick="@{() -> commentPresenter.onClickComment()}" />
         <!-- end 和系统语言相关     elevation 悬浮高度 -->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

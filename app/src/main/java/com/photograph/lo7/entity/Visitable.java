@@ -20,13 +20,22 @@ public class Visitable extends BaseObservable {
 
     private Integer likes;
 
+    // 相对时间，如"一分钟前"、"昨天"等
     private String relativeDate;
 
+    // 绝对时间
     private String absoluteDate;
 
     private boolean hasStar;
 
     private boolean hasLike;
+
+
+    private String authorName;
+    private String authorPic;
+    private Integer authorFollowCount;
+    private Integer authorFollowerCount;
+    private Boolean authorHasBeenFollowed;
 
     public Integer getId() {
         return id;
@@ -43,13 +52,14 @@ public class Visitable extends BaseObservable {
     public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
     }
-
+    @Bindable
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+        notifyPropertyChanged(BR.title);
     }
 
     @Bindable
@@ -82,6 +92,7 @@ public class Visitable extends BaseObservable {
         notifyPropertyChanged(BR.stars);
     }
 
+
     @Bindable
     public Integer getLikes() {
         return likes;
@@ -108,12 +119,6 @@ public class Visitable extends BaseObservable {
         this.absoluteDate = absoluteDate;
     }
 
-    private String authorName;
-    private String authorPic;
-    private Integer authorFollowCount;
-    private Integer authorFollowerCount;
-    private Boolean authorHasBeenFollowed;
-
     @Bindable
     public boolean getHasStar() {
         return hasStar;
@@ -123,6 +128,7 @@ public class Visitable extends BaseObservable {
         this.hasStar = hasStar;
         notifyPropertyChanged(BR.hasStar);
     }
+
 
     @Bindable
     public boolean getHasLike() {

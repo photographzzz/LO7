@@ -2,44 +2,53 @@ package com.photograph.lo7.controller.impl;
 
 import com.photograph.lo7.controller.IStarController;
 import com.photograph.lo7.entity.Visitable;
-import com.photograph.lo7.service.IStarService;
-import com.photograph.lo7.service.impl.StarArticleService;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import rxhttp.wrapper.param.RxHttp;
 
 public enum StarVideoController implements IStarController {
     INSTANCE;
-    private IStarService starArticleService = new StarArticleService();
-
     @Override
-    public Observable<Integer> star(Integer articleId) {
-        return starArticleService.star(articleId);
+    public Observable<Integer> star( Integer videoId) {
+        return RxHttp.postForm("sv/star_video")
+                .add("videoId", videoId)
+                .asResponse(Integer.class);
     }
 
     @Override
-    public Observable<Integer> unstar(Integer articleId) {
-        return starArticleService.unstar(articleId);
+    public Observable<Integer> unstar(Integer videoId) {
+        return RxHttp.postForm("sv/unstar_video")
+                .add("videoId", videoId)
+                .asResponse(Integer.class);
     }
 
     @Override
-    public Observable<Boolean> hasStar(Integer articleId) {
-        return starArticleService.hasStar(articleId);
+    public Observable<Boolean> hasStar(Integer videoId) {
+        return RxHttp.get("sv/has_star_video")
+                .add("videoId", videoId)
+                .asResponse(Boolean.class);
     }
 
     @Override
-    public Observable<Integer> getStarCountOfObject(Integer articleId) {
-        return starArticleService.getStarCountOfObject(articleId);
+    public Observable<Integer> getStarCountOfVisitable(Integer videoId) {
+        return RxHttp.get("sv/video_star_count")
+                .add("videoId", videoId)
+                .asResponse(Integer.class);
     }
 
     @Override
     public Observable<Integer> getStarCountOfUser(Integer userId) {
-        return starArticleService.getStarCountOfUser(userId);
+        return RxHttp.get("sv/user_star_count")
+                .add("userId", userId)
+                .asResponse(Integer.class);
     }
 
     @Override
-    public <E extends Visitable> Observable<List<E>> getAllStarObjectOfUser(Integer userId, Class<E> clazz) {
-        return starArticleService.getAllStarObjectOfUser(userId, clazz);
+    public <E extends Visitable> Observable<List<E>> getAllStarVisitableOfUser(Integer userId, Class<E> clazz) {
+        return RxHttp.get("sv/all_star_video")
+                .add("userId", userId)
+                .asResponseList(clazz);
     }
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.photograph.lo7.entity.User;
-import com.photograph.lo7.entity.Visitable;
+import com.photograph.lo7.entity.Article;
 import com.photograph.lo7.httpsender.RxHttpManager;
 
 /**
@@ -15,7 +15,7 @@ public class AppHolder extends Application {
 
     private static AppHolder instance;
     public static User currentUser;
-    public static Visitable currentArticle;
+    public static Article currentArticle;
 
     public final static String userPicPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/lo7/user/pic";
 

@@ -1,14 +1,11 @@
 package com.photograph.lo7.ui.activities;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +20,6 @@ import com.photograph.lo7.controller.ILikeController;
 import com.photograph.lo7.controller.IStarController;
 import com.photograph.lo7.controller.SectionController;
 import com.photograph.lo7.databinding.ActivityArticleBinding;
-import com.photograph.lo7.databinding.MyCommentLayoutBinding;
 import com.photograph.lo7.entity.Visitable;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.presenter.CommentPresenter;
@@ -49,7 +45,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         articleBinding = DataBindingUtil.setContentView(this, R.layout.activity_article);
-        articleBinding.setArticle(article);
         initSections();
         initComments();
 
@@ -73,7 +68,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         articleBinding.setCommentPresenter(commentPresenter);
 
 
-        articleBinding.articleCommentFloatingBtn.commentFloatingBtn.setOnClickListener(v -> {
+        /*articleBinding.articleCommentFloatingBtn.commentFloatingBtn.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(articleBinding.getRoot().getContext());
             builder.setTitle("评论");
             MyCommentLayoutBinding commentLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(articleBinding.getRoot().getContext()), R.layout.my_comment_layout, null,false);
@@ -89,7 +84,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
                 dialog.cancel();
             });
             builder.show();
-        });
+        });*/
     }
 
     private void initSections() {
@@ -160,22 +155,9 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
 
     public class ArticleCommentPresenter extends CommentPresenter{
         @Override
-        public void onClickComment(View view ,Integer userId) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-            builder.setTitle("评论");
-            MyCommentLayoutBinding commentLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(articleBinding.getRoot().getContext()), R.layout.my_comment_layout, null,false);
-            builder.setView(commentLayoutBinding.getRoot());
-            final EditText commentEdit = commentLayoutBinding.commentEdit;
-            builder.setPositiveButton("发送", (dialog, which) -> {
-                String content = commentEdit.getText().toString().trim();
-                int articleId = article.getId();
-                ArticleCommentPresenter.super.onClickComment(articleId,userId,content,commentAdapter,articleBinding.getRoot());
-            });
+        public void onClickComment() {
+            super.onClickComment(article.getId(),commentAdapter,articleBinding.getRoot());
 
-            builder.setNegativeButton("取消", (dialog, which) -> {
-                dialog.cancel();
-            });
-            builder.show();
         }
     }
 }
