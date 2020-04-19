@@ -2,9 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable
-            name="user"
-            type="com.photograph.lo7.entity.User" />
+        <import type="com.photograph.lo7.AppHolder" />
 
         <variable
             name="commentPresenter"

@@ -5,15 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="user"
-            type="com.photograph.lo7.entity.User" />
-
-        <variable
-            name="friend"
-            type="com.photograph.lo7.entity.Friend" />
-
         <variable
             name="article"
             type="com.photograph.lo7.entity.Visitable" />
@@ -56,9 +47,7 @@
                     <include
                         android:id="@+id/article_head_view"
                         layout="@layout/my_visitable_head_view"
-                        bind:friend="@{friend}"
                         bind:followerPresenter="@{followerPresenter}"
-                        bind:user="@{user}"
                         bind:visitable="@{article}" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -77,8 +66,7 @@
                 <include
                     android:id="@+id/article_comment_floating_btn"
                     layout="@layout/my_comment_floating_btn"
-                    bind:commentPresenter="@{commentPresenter}"
-                    bind:user="@{user}"/>
+                    bind:commentPresenter="@{commentPresenter}"/>
             </LinearLayout>
 
 

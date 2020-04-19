@@ -12,7 +12,7 @@ import com.rxjava.rxlife.RxLife;
 
 public class StarUtils {
     public static void handle(IStarController starController, Visitable visitable, MenuItem starItem, View view) {
-        if (visitable.isHasStar()) {
+        if (visitable.getHasStar()) {
             unstar(starController, visitable, starItem, view);
         }else {
             star(starController, visitable, starItem, view);

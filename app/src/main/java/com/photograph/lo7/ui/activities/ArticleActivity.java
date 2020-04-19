@@ -1,6 +1,5 @@
 package com.photograph.lo7.ui.activities;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,10 +22,8 @@ import com.photograph.lo7.controller.ICommentController;
 import com.photograph.lo7.controller.ILikeController;
 import com.photograph.lo7.controller.IStarController;
 import com.photograph.lo7.controller.SectionController;
-import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.ActivityArticleBinding;
 import com.photograph.lo7.databinding.MyCommentLayoutBinding;
-import com.photograph.lo7.entity.Friend;
 import com.photograph.lo7.entity.Visitable;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.presenter.CommentPresenter;
@@ -52,9 +49,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         articleBinding = DataBindingUtil.setContentView(this, R.layout.activity_article);
-        articleBinding.articleHeadView.setUser(AppHolder.currentUser);
         articleBinding.setArticle(article);
-        initAuthorProfile();
         initSections();
         initComments();
 
@@ -97,16 +92,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    private void initAuthorProfile() {
-        UserController.INSTANCE.getFriendProfile(article.getAuthorId())
-                .as(RxLife.asOnMain(this))
-                .subscribe(author -> {
-                    articleBinding.setFriend(author);
-                }, (OnError) error -> {
-                    error.show(error.getErrorMsg());
-                });
-    }
-
     private void initSections() {
         sectionController.getAllSection(article.getId())
                 .as(RxLife.asOnMain(this))
@@ -132,9 +117,9 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.tool_menu_article, menu);
         MenuItem likeItem = menu.getItem(0);
-        likeItem.setIcon(article.isHasLike() ? R.drawable.ic_like_24dp : R.drawable.ic_like_border_24dp);
+        likeItem.setIcon(article.getHasLike() ? R.drawable.ic_like_24dp : R.drawable.ic_like_border_24dp);
         MenuItem starItem = menu.getItem(1);
-        starItem.setIcon(article.isHasStar() ? R.drawable.ic_favorite_24dp : R.drawable.ic_favorite_border_24dp);
+        starItem.setIcon(article.getHasStar() ? R.drawable.ic_favorite_24dp : R.drawable.ic_favorite_border_24dp);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -168,8 +153,8 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
 
     public class ArticleFollowerPresenter extends FollowerPresenter {
         @Override
-        public void onClickFollowButton(Friend friend) {
-            super.onClickFollowButton(friend, articleBinding.getRoot());
+        public void onClickFollowButton(Visitable visitable) {
+            super.onClickFollowButton(visitable, articleBinding.getRoot());
         }
     }
 

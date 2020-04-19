@@ -12,7 +12,7 @@ import com.rxjava.rxlife.RxLife;
 
 public class LikeUtils {
     public static void handle(ILikeController likeController, Visitable visitable, MenuItem likeItem, View view) {
-        if (visitable.isHasLike()) {
+        if (visitable.getHasLike()) {
             unlike(likeController, visitable, likeItem, view);
         }else {
             like(likeController, visitable, likeItem, view);

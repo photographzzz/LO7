@@ -20,21 +20,13 @@ public class Visitable extends BaseObservable {
 
     private Integer likes;
 
-    // 相对时间，如"一分钟前"、"昨天"等
     private String relativeDate;
 
-    // 绝对时间
     private String absoluteDate;
 
-    private Boolean hasStar;
+    private boolean hasStar;
 
-    private Boolean hasLike;
-
-    private String authorName;
-    private String authorPic;
-    private Integer authorFollowCount;
-    private Integer authorFollowerCount;
-    private Boolean authorHasBeenFollowed;
+    private boolean hasLike;
 
     public Integer getId() {
         return id;
@@ -60,36 +52,44 @@ public class Visitable extends BaseObservable {
         this.title = title;
     }
 
+    @Bindable
     public Integer getVisitCount() {
         return visitCount;
     }
 
     public void setVisitCount(Integer visitCount) {
         this.visitCount = visitCount;
+        notifyPropertyChanged(BR.visitCount);
     }
 
+    @Bindable
     public Integer getCommentCount() {
         return commentCount;
     }
 
     public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
+        notifyPropertyChanged(BR.commentCount);
     }
 
+    @Bindable
     public Integer getStars() {
         return stars;
     }
 
     public void setStars(Integer stars) {
         this.stars = stars;
+        notifyPropertyChanged(BR.stars);
     }
 
+    @Bindable
     public Integer getLikes() {
         return likes;
     }
 
     public void setLikes(Integer likes) {
         this.likes = likes;
+        notifyPropertyChanged(BR.likes);
     }
 
     public String getRelativeDate() {
@@ -108,20 +108,30 @@ public class Visitable extends BaseObservable {
         this.absoluteDate = absoluteDate;
     }
 
-    public Boolean getHasStar() {
+    private String authorName;
+    private String authorPic;
+    private Integer authorFollowCount;
+    private Integer authorFollowerCount;
+    private Boolean authorHasBeenFollowed;
+
+    @Bindable
+    public boolean getHasStar() {
         return hasStar;
     }
 
-    public void setHasStar(Boolean hasStar) {
+    public void setHasStar(boolean hasStar) {
         this.hasStar = hasStar;
+        notifyPropertyChanged(BR.hasStar);
     }
 
-    public Boolean getHasLike() {
+    @Bindable
+    public boolean getHasLike() {
         return hasLike;
     }
 
-    public void setHasLike(Boolean hasLike) {
+    public void setHasLike(boolean hasLike) {
         this.hasLike = hasLike;
+        notifyPropertyChanged(BR.hasLike);
     }
 
     public String getAuthorName() {
@@ -140,27 +150,33 @@ public class Visitable extends BaseObservable {
         this.authorPic = authorPic;
     }
 
+    @Bindable
     public Integer getAuthorFollowCount() {
         return authorFollowCount;
     }
 
     public void setAuthorFollowCount(Integer authorFollowCount) {
         this.authorFollowCount = authorFollowCount;
+        notifyPropertyChanged(BR.authorFollowCount);
     }
 
+    @Bindable
     public Integer getAuthorFollowerCount() {
         return authorFollowerCount;
     }
 
     public void setAuthorFollowerCount(Integer authorFollowerCount) {
         this.authorFollowerCount = authorFollowerCount;
+        notifyPropertyChanged(BR.authorFollowerCount);
     }
 
+    @Bindable
     public Boolean getAuthorHasBeenFollowed() {
         return authorHasBeenFollowed;
     }
 
     public void setAuthorHasBeenFollowed(Boolean authorHasBeenFollowed) {
         this.authorHasBeenFollowed = authorHasBeenFollowed;
+        notifyPropertyChanged(BR.authorHasBeenFollowed);
     }
 }

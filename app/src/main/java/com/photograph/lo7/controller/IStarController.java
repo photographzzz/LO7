@@ -34,7 +34,4 @@ public interface IStarController {
     public Observable<Integer> getStarCountOfUser(Integer userId);
 
     public <E extends Visitable> Observable<List<E>> getAllStarObjectOfUser(Integer userId, Class<E> clazz);
-
-
-
 }
