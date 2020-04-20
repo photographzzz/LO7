@@ -17,10 +17,8 @@ import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.NavigationHeaderBinding;
 import com.photograph.lo7.ui.userprofilefragments.UpdateUserProfileActivity;
-import com.photograph.lo7.entity.User;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
-    private User user = AppHolder.currentUser;
     private AppBarConfiguration appBarConfiguration;
 
 

@@ -3,7 +3,6 @@ package com.photograph.lo7.ui.activities;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +28,7 @@ import com.photograph.lo7.util.SpaceItemDecoration;
 import com.photograph.lo7.util.StarUtils;
 import com.rxjava.rxlife.RxLife;
 
-public class ArticleActivity extends AppCompatActivity implements View.OnClickListener {
+public class ArticleActivity extends AppCompatActivity  {
     private ActivityArticleBinding articleBinding;
     private RecyclerView sectionsRecyclerView;
     private RecyclerView commentsRecyclerView;
@@ -53,6 +52,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+
         SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(10);
 
         sectionsRecyclerView = articleBinding.sectionsRecyclerview;
@@ -67,24 +67,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         CommentPresenter commentPresenter = new ArticleCommentPresenter();
         articleBinding.setCommentPresenter(commentPresenter);
 
-
-        /*articleBinding.articleCommentFloatingBtn.commentFloatingBtn.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(articleBinding.getRoot().getContext());
-            builder.setTitle("评论");
-            MyCommentLayoutBinding commentLayoutBinding = DataBindingUtil.inflate(LayoutInflater.from(articleBinding.getRoot().getContext()), R.layout.my_comment_layout, null,false);
-            builder.setView(commentLayoutBinding.getRoot());
-            final EditText commentEdit = commentLayoutBinding.commentEdit;
-            builder.setPositiveButton("发送", (dialog, which) -> {
-                String content = commentEdit.getText().toString().trim();
-                int articleId = article.getId();
-                new CommentPresenter().onClickComment(articleId,AppHolder.currentUser.getId(),content,commentAdapter,articleBinding.getRoot());
-            });
-
-            builder.setNegativeButton("取消", (dialog, which) -> {
-                dialog.cancel();
-            });
-            builder.show();
-        });*/
     }
 
     private void initSections() {
@@ -137,14 +119,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-
-        }
-    }
-
 
     public class ArticleFollowerPresenter extends FollowerPresenter {
         @Override
@@ -157,7 +131,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onClickComment() {
             super.onClickComment(article.getId(),commentAdapter,articleBinding.getRoot());
-
         }
     }
 }

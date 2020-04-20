@@ -29,6 +29,9 @@ android {
         targetCompatibility = 1.8
     }
 
+    defaultConfig {
+        multiDexEnabled true
+    }
 }
 
 dependencies {
@@ -63,5 +66,6 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'  //切换主线程，Android工程必须
     implementation 'com.rxjava.rxlife:rxlife-x:2.0.0'  //页面销毁，关闭请求，非必须
 
-    implementation 'com.wx.goodview:goodview:1.0.0'  //点赞动画
+    implementation 'com.jcodecraeer:xrecyclerview:1.6.0'
 }
+

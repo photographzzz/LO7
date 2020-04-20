@@ -11,8 +11,9 @@ import rxhttp.wrapper.param.RxHttp;
 public enum ArticleController {
     INSTANCE;
 
-    public Observable<List<Article>> getAllArticles() {
+    public Observable<List<Article>> getAllArticles(Integer pageNum) {
         return RxHttp.get("/article/all")
+                .add("pageNum",pageNum)
                 .asResponseList(Article.class);
     }
 
@@ -36,6 +37,7 @@ public enum ArticleController {
     public Observable<List<Article>> getArticlesByType(int type) {
         return RxHttp.get("/article/type")
                 .add("type",type)
+                .add("pageNum",1)
                 .asResponseList(Article.class);
     }
 

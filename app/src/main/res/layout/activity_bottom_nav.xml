@@ -7,17 +7,20 @@
 
     <!-- HomeActivity底部导航栏 -->
 
-    <fragment
-        android:id="@+id/nav_host_bottom_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/graph_bottom_navigation_bar_activity" />
+
+
+        <fragment
+            android:id="@+id/nav_host_bottom_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            android:layout_above="@+id/home_bottom_navigation"
+            app:navGraph="@navigation/graph_bottom_navigation_bar_activity" />
+
+
+    <!--  防止被bottom navigation view 挡住 -->
+
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,6 +33,9 @@
         app:itemIconTint="@drawable/selector_bottom_nav"
         app:itemTextColor="@drawable/selector_bottom_nav"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_bottom" />
+        app:menu="@menu/menu_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 </RelativeLayout>
 

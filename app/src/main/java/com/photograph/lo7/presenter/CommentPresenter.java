@@ -12,6 +12,8 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.CommentAdapter;
 import com.photograph.lo7.controller.ICommentController;
 import com.photograph.lo7.databinding.MyCommentLayoutBinding;
+import com.photograph.lo7.httpsender.OnError;
+import com.photograph.lo7.httpsender.Tip;
 import com.rxjava.rxlife.RxLife;
 
 public class CommentPresenter {
@@ -30,7 +32,10 @@ public class CommentPresenter {
             Integer userId = AppHolder.currentUser.getId();
             ICommentController.getCommentArticleController().commentVisitable(visitableId, userId, content)
                     .as(RxLife.asOnMain(view))
-                    .subscribe(commentAdapter::addCommentToEnd);
+                    .subscribe(comment -> {
+                        commentAdapter.addCommentToEnd(comment);
+                        Tip.show("评论成功");
+                    }, (OnError) error -> error.show(error.getErrorMsg()));
         });
         builder.setNegativeButton("取消", (dialog, which) -> {
             dialog.cancel();

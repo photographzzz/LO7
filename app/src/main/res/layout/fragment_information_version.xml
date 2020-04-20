@@ -5,17 +5,10 @@
 
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:orientation="vertical"
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/version_article_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/version_article_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            android:scrollbars="vertical" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:scrollbars="vertical" />
 </layout>

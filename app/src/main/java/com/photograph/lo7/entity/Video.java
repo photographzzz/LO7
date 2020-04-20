@@ -10,8 +10,4 @@ public class Video extends Visitable {
     public void setSrc(String src) {
         this.src = src;
     }
-
-    public static void main(String[] args) {
-        Visitable visitable = new Video();
-    }
 }

@@ -22,14 +22,19 @@ import java.util.List;
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
     private List<Article> articles;
     private Context context;
-    public ArticleAdapter(Context context,List<Article> articles) {
+
+    public ArticleAdapter(Context context) {
+        this.context = context;
+    }
+
+    public ArticleAdapter(Context context, List<Article> articles) {
         this.articles = articles;
         this.context = context ;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemArticleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_article, parent, false);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
+        ItemArticleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_article, viewGroup, false);
         return new ViewHolder(binding);
     }
 
@@ -51,12 +56,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         });
     }
 
-
-    @Override
-    public int getItemCount() {
-        return articles.size();
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public ItemArticleBinding binding;
@@ -65,5 +64,23 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return articles.size();
+
+    }
+
+
+
+    public void loadMore(List<Article> articles) {
+        int end = articles.size();
+        this.articles.addAll(articles);
+        //notifyItemInserted(end);
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }

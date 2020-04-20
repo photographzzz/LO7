@@ -10,36 +10,35 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.photograph.lo7.R;
-import com.photograph.lo7.adapter.ArticleAdapter;
-import com.photograph.lo7.controller.ArticleController;
 import com.photograph.lo7.databinding.FragmentInformationVersionBinding;
-import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.util.SpaceItemDecoration;
-import com.rxjava.rxlife.RxLife;
+import com.photograph.lo7.util.XRecyclerUtils;
 
-public class VersionInformationFragment extends Fragment {
+public class VersionInformationFragment extends Fragment implements XRecyclerView.LoadingListener {
+    private FragmentInformationVersionBinding versionBinding;
+    private XRecyclerView recyclerView;
 
+    private int pageNum = 1;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentInformationVersionBinding versionBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_version, container, false);
-        RecyclerView recyclerView = versionBinding.versionArticleRecyclerview;
+        versionBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_version, container, false);
+        recyclerView = versionBinding.versionArticleRecyclerview;
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLimitNumberToCallLoadMore(10);
         recyclerView.addItemDecoration(new SpaceItemDecoration(10));
-        ArticleController.INSTANCE.getVersionArticles()
-                .as(RxLife.asOnMain(this))
-                .subscribe(articles -> {
-                    ArticleAdapter adapter = new ArticleAdapter(getContext(), articles);
-                    recyclerView.setAdapter(adapter);
-                }, (OnError) error -> {
-                    error.show(error.getErrorMsg());
-                });
+        recyclerView.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
+        recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        recyclerView.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
+        recyclerView.setLoadingListener(this);
+        onRefresh();
         return versionBinding.getRoot();
     }
 
@@ -48,5 +47,27 @@ public class VersionInformationFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @Override
+    public void onDestroy() {
+        if (recyclerView != null) {
+            recyclerView.destroy();
+            recyclerView = null;
+        }
+        super.onDestroy();
+    }
 
+    @Override
+    public void onRefresh() {
+        pageNum = 1;
+        XRecyclerUtils.refresh(recyclerView, pageNum++, this);
+    }
+
+    @Override
+    public void onLoadMore() {
+        XRecyclerUtils.loadMoreArticles(recyclerView, pageNum++, this);
+        recyclerView.loadMoreComplete();
+        recyclerView.setLoadingMoreEnabled(true);
+        recyclerView.setPullRefreshEnabled(true);
+    }
 }
+
