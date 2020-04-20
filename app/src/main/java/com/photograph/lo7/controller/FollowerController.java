@@ -28,7 +28,7 @@ public enum FollowerController {
     }
 
     public Observable<Integer>  unfollow(int friendId) {
-        return RxHttp.postForm("/follower/unfollow_friend")
+        return RxHttp.deleteForm("/follower/unfollow_friend")
                 .add("friendId", friendId)
                 .asResponse(Integer.class);
     }

@@ -1,6 +1,5 @@
 package com.photograph.lo7.ui.userprofilefragments;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +21,6 @@ import com.photograph.lo7.databinding.ActivityUpdateProfileBinding;
 import java.util.List;
 
 public class UpdateUserProfileActivity extends AppCompatActivity {
-    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,7 +17,7 @@ public enum LikeArticleController implements ILikeController {
 
     @Override
     public Observable<Integer> unlike(Integer articleId) {
-        return RxHttp.postForm("la/unlike_article")
+        return RxHttp.deleteForm("la/unlike_article")
                 .add("articleId", articleId)
                 .asResponse(Integer.class);
     }

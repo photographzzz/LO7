@@ -38,31 +38,31 @@ public enum UserController {
 
 
     public Observable<String> updateUsername(String username) {
-        return RxHttp.postForm("user/update_username")
+        return RxHttp.patchForm("user/update_username")
                 .add("username", username)
                 .asResponse(String.class);
     }
 
     public Observable<String> updateBio(String bio) {
-        return RxHttp.postForm("user/update_bio")
+        return RxHttp.patchForm("user/update_bio")
                 .add("bio", bio)
                 .asResponse(String.class);
     }
 
     public Observable<String> updateEmail(String email) {
-        return RxHttp.postForm("user/update_email")
+        return RxHttp.patchForm("user/update_email")
                 .add("email", email)
                 .asResponse(String.class);
     }
 
     public Observable<String> updatePhone(String phone) {
-        return RxHttp.postForm("user/update_phone")
+        return RxHttp.patchForm("user/update_phone")
                 .add("phone", phone)
                 .asResponse(String.class);
     }
 
     public Observable<Integer> updateGender(int gender) {
-        return RxHttp.postForm("user/update_gender")
+        return RxHttp.patchForm("user/update_gender")
                 .add("gender", gender)
                 .asResponse(Integer.class);
     }

@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentUpdateProfileBinding;
 
@@ -30,7 +29,7 @@ public class UpdateProfileFragment extends Fragment {
         updateProfileBinding.updatePhoneFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updatePhoneFragment));
         updateProfileBinding.updateBioFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updateBioFragment));
 
-        updateProfileBinding.setUser(AppHolder.currentUser);
+        /*updateProfileBinding.setUser(AppHolder.currentUser);*/
 
         return view;
     }

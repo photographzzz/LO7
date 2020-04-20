@@ -6,9 +6,7 @@
 
     <data>
 
-        <variable
-            name="user"
-            type="com.photograph.lo7.entity.User" />
+        <import type="com.photograph.lo7.AppHolder" />
     </data>
 
 
@@ -22,14 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="头像"
-            app:mPic="@{user.pic,default = `R.drawable.nav_icon`}" />
+            app:mPic="@{AppHolder.currentUser.pic,default = `R.drawable.nav_icon`}" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
             android:id="@+id/update_username_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="用户名"
-            app:mInfo='@{user.username}' />
+            app:mInfo='@{AppHolder.currentUser.username}' />
 
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
@@ -37,160 +35,28 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="签名"
-            app:mInfo="@{user.bio,default = `没有签名哦`}" />
+            app:mInfo="@{AppHolder.currentUser.bio,default = `没有签名哦`}" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
             android:id="@+id/update_gender_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="性别 "
-            app:mInfo="@{String.valueOf(user.gender).equals(`0`) ? `男` :`女` }" />
+            app:mInfo="@{String.valueOf(AppHolder.currentUser.gender).equals(`0`) ? `男` :`女` }" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
             android:id="@+id/update_email_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="邮箱"
-            app:mInfo="@{user.email}" />
+            app:mInfo="@{AppHolder.currentUser.email}" />
 
         <com.photograph.lo7.view.MyInfoRelativeLayout
             android:id="@+id/update_phone_fragment"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:mHint="电话"
-            app:mInfo="@{user.phone}" />
-
-        <!--
-
-                <RelativeLayout
-                    android:id="@+id/update_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:text="头像" />
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_alignParentRight="true"
-                        bind:url="@{user.pic}"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/update_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:text="用户名" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{user.username}"
-                        android:layout_alignParentRight="true"
-                        style="?borderlessButtonStyle"/>
-                </RelativeLayout>
-
-
-
-
-                <RelativeLayout
-                    android:id="@+id/update_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:text="性别" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{String.valueOf(user.gender)}"
-                        android:layout_alignParentRight="true"
-                        style="?borderlessButtonStyle"/>
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/update_bio"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:text="签名" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{user.bio}"
-                        android:layout_alignParentRight="true"
-                        style="?borderlessButtonStyle"/>
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/update_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:text="邮箱" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{user.email}"
-                        android:layout_alignParentRight="true"
-                        style="?borderlessButtonStyle"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/update_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:text="电话" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@{user.phone}"
-                        android:layout_alignParentRight="true"
-                        style="?borderlessButtonStyle"/>
-                </RelativeLayout>
-        -->
+            app:mInfo="@{AppHolder.currentUser.phone}" />
 
 
     </LinearLayout>

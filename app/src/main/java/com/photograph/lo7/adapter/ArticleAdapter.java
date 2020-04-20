@@ -23,10 +23,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     private List<Article> articles;
     private Context context;
 
-    public ArticleAdapter(Context context) {
-        this.context = context;
-    }
-
     public ArticleAdapter(Context context, List<Article> articles) {
         this.articles = articles;
         this.context = context ;

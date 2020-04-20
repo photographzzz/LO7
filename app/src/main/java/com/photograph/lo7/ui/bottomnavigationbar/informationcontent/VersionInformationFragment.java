@@ -9,17 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentInformationVersionBinding;
-import com.photograph.lo7.util.SpaceItemDecoration;
 import com.photograph.lo7.util.XRecyclerUtils;
 
 public class VersionInformationFragment extends Fragment implements XRecyclerView.LoadingListener {
-    private FragmentInformationVersionBinding versionBinding;
     private XRecyclerView recyclerView;
 
     private int pageNum = 1;
@@ -27,16 +23,9 @@ public class VersionInformationFragment extends Fragment implements XRecyclerVie
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        versionBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_version, container, false);
+        FragmentInformationVersionBinding versionBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_version, container, false);
         recyclerView = versionBinding.versionArticleRecyclerview;
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setLimitNumberToCallLoadMore(10);
-        recyclerView.addItemDecoration(new SpaceItemDecoration(10));
-        recyclerView.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
-        recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        recyclerView.setLoadingMoreProgressStyle(ProgressStyle.SquareSpin);
+        XRecyclerUtils.initXRecyclerUtils(recyclerView,this);
         recyclerView.setLoadingListener(this);
         onRefresh();
         return versionBinding.getRoot();

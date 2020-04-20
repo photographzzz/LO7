@@ -13,9 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
-import com.photograph.lo7.databinding.NavigationHeaderBinding;
 import com.photograph.lo7.ui.userprofilefragments.UpdateUserProfileActivity;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -39,10 +37,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // 设置导航栏头部
         View header = navigationView.getHeaderView(0);
         header.findViewById(R.id.navigation_user_info).setOnClickListener(this);
-        NavigationHeaderBinding navHeaderBinding = DataBindingUtil.bind(header);
+        DataBindingUtil.bind(header);
 
-        // 绑定用户
-        navHeaderBinding.setUser(AppHolder.currentUser);
+        /*// 绑定用户
+        NavigationHeaderBinding navHeaderBinding = DataBindingUtil.bind(header);
+        navHeaderBinding.setUser(AppHolder.currentUser);*/
     }
 
 
