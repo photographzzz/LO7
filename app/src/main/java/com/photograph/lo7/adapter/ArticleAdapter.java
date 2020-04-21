@@ -68,10 +68,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
     }
 
-
-
     public void loadMore(List<Article> articles) {
-        int end = articles.size();
+        //int end = articles.size();
         this.articles.addAll(articles);
         //notifyItemInserted(end);
     }

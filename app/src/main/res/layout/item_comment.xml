@@ -18,7 +18,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             bind:layout_constraintLeft_toLeftOf="parent"
-            bind:authorCirImg="@{comment.authorPic}" />
+            bind:cirImg="@{comment.authorPic}" />
 
         <LinearLayout
             android:layout_width="match_parent"

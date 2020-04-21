@@ -13,7 +13,7 @@ public enum UserController {
     INSTANCE;
 
     public Observable<User> login(String username, String password) {
-        return RxHttp.get("user/login")
+        return RxHttp.postForm("user/login")
                 .add("username", username)
                 .add("password", password)
                 .asResponse(User.class);

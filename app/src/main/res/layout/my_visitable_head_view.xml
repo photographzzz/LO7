@@ -45,7 +45,7 @@
                 android:layout_height="65dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                bind:authorCirImg="@{visitable.authorPic}" />
+                bind:cirImg="@{visitable.authorPic}" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_alignParentRight="true"
                 android:onClick="@{() -> followerPresenter.onClickFollowButton(visitable)}"
                 android:visibility="@{AppHolder.currentUser.id == visitable.authorId ? View.GONE : View.VISIBLE }"
-                bind:follow_btn_img="@{visitable.authorHasBeenFollowed}" />
+                bind:followBtnImg="@{visitable.authorHasBeenFollowed}" />
         </RelativeLayout>
     </LinearLayout>
 </layout>

@@ -21,6 +21,6 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            bind:section_img="@{section.image}" />
+            bind:img="@{section.image}" />
     </LinearLayout>
 </layout>
