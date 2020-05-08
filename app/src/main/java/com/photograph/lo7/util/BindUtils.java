@@ -1,12 +1,21 @@
 package com.photograph.lo7.util;
 
+import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.photograph.lo7.R;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,21 +32,54 @@ public class BindUtils {
 
     @BindingAdapter({"cirImg"})
     public static void loadFriendPic(CircleImageView view, String src) {
-            Glide.with(view.getContext()).load(src)
-                    .error(R.drawable.nav_icon)
-                    .into(view);
+        Glide.with(view.getContext()).load(src)
+                .error(R.drawable.nav_icon)
+                .into(view);
 
     }
 
     @BindingAdapter("followBtnImg")
-    public static void loadFollowButton(ImageButton view, boolean hasBennFollowed) {
+    public static void loadFollowImageBtn(ImageButton view, boolean hasBennFollowed) {
         Glide.with(view).load(view.getContext().getResources()
                 .getDrawable(hasBennFollowed ? R.drawable.ic_follow_checked : R.drawable.ic_follow)).into(view);
     }
 
-   /* @BindingAdapter("commentLikeBtn")
-    public static void loadCommentLikeBtn(ImageButton view, boolean hasLike) {
+    @BindingAdapter("followFloatingBtnImg")
+    public static void loadFollowFloatingBtn(FloatingActionButton view, boolean hasBennFollowed) {
         Glide.with(view).load(view.getContext().getResources()
-                .getDrawable(hasLike ? R.drawable.ic_like_24dp : R.drawable.ic_like_border_24dp)).into(view);
-    }*/
+                .getDrawable(hasBennFollowed ? R.drawable.ic_follow_checked : R.drawable.ic_follow)).into(view);
+    }
+
+
+
+    @BindingAdapter("visitableSrc")
+    public static void loadVisitableSrc(WebView webView, String src) {
+        Document parse = Jsoup.parse(src);
+        Elements imgs = parse.getElementsByTag("img");
+        if (!imgs.isEmpty()) {
+            for (Element e : imgs) {
+                imgs.attr("width", "100%");
+                imgs.attr("height", "auto");
+            }
+        }
+        Elements videos = parse.getElementsByTag("video");
+        if (!videos.isEmpty()) {
+            for (Element e : videos) {
+                videos.attr("width", "100%");
+                videos.attr("height", "auto");
+            }
+        }
+        String content = parse.toString();
+        webView.loadDataWithBaseURL(null, content, "text/html", "utf-8", null);
+    }
+
+    @BindingAdapter("commentHint")
+    public static void loadCommentHint(TextView textView, int commentCount) {
+        if (commentCount == 0) {
+            textView.setText("暂时还没有评论");
+            textView.setVisibility(View.VISIBLE);
+        }else {
+            textView.setVisibility(View.GONE);
+        }
+    }
 }

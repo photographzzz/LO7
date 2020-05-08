@@ -19,9 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activities.ArticleActivity"></activity>
+        <activity android:name=".ui.activities.CreateRoomActivity"></activity>
+        <activity
+            android:name=".ui.activities.FriendActivity"
+            android:theme="@style/FriendActivityTheme" />
+        <activity android:name=".ui.activities.PostMomentActivity" />
+        <activity android:name=".ui.activities.PostVideoActivity" />
+        <activity android:name=".ui.activities.ArticleActivity" />
+        <activity android:name=".ui.activities.MomentActivity" />
+        <activity android:name=".ui.activities.VideoActivity" />
         <activity android:name=".ui.userprofilefragments.UpdateUserProfileActivity" />
-        <activity android:name=".ui.activities.HomeActivity"></activity>
+        <activity android:name=".ui.activities.HomeActivity" />
         <activity
             android:name=".ui.activities.MainActivity"
             android:theme="@style/Theme.Design.NoActionBar">
@@ -31,16 +39,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.photograph.lo7"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
     </application>
 
 </manifest>

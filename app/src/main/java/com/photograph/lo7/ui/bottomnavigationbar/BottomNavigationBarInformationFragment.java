@@ -15,9 +15,6 @@ import com.photograph.lo7.R;
 import com.photograph.lo7.ui.bottomnavigationbar.informationcontent.InformationFragmentViewPager;
 
 public class BottomNavigationBarInformationFragment extends Fragment {
-
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
     private String[] titles = {"推荐", "赛事", "版本", "玩法"};
 
     @Nullable
@@ -26,8 +23,8 @@ public class BottomNavigationBarInformationFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information, container, false);
 
-        tabLayout = view.findViewById(R.id.information_tablayout);
-        viewPager = view.findViewById(R.id.information_viewpager);
+        TabLayout tabLayout = view.findViewById(R.id.information_tablayout);
+        ViewPager viewPager = view.findViewById(R.id.information_viewpager);
 
         tabLayout.addTab(tabLayout.newTab().setText(titles[0]));
         tabLayout.addTab(tabLayout.newTab().setText(titles[1]));
@@ -44,3 +41,5 @@ public class BottomNavigationBarInformationFragment extends Fragment {
         return view;
     }
 }
+
+

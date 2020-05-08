@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentInformationMatchBinding;
-import com.photograph.lo7.util.XRecyclerUtils;
+import com.photograph.lo7.util.XRecyclerViewUtils;
 
 public class MatchInformationFragment extends Fragment implements XRecyclerView.LoadingListener {
     private XRecyclerView recyclerView;
@@ -24,7 +24,7 @@ public class MatchInformationFragment extends Fragment implements XRecyclerView.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentInformationMatchBinding matchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_match, container, false);
         recyclerView = matchBinding.matchArticleRecyclerview;
-        XRecyclerUtils.initXRecyclerUtils(recyclerView,this);
+        XRecyclerViewUtils.initXRecyclerUtils(recyclerView,this);
         recyclerView.setLoadingListener(this);
         onRefresh();
         return matchBinding.getRoot();
@@ -48,12 +48,12 @@ public class MatchInformationFragment extends Fragment implements XRecyclerView.
     @Override
     public void onRefresh() {
         pageNum = 1;
-        XRecyclerUtils.refresh(recyclerView, pageNum++, this);
+        XRecyclerViewUtils.refreshArticles(recyclerView, pageNum++, this);
     }
 
     @Override
     public void onLoadMore() {
-        XRecyclerUtils.loadMoreArticles(recyclerView, pageNum++, this);
+        XRecyclerViewUtils.loadMoreArticles(recyclerView, pageNum++, this);
         recyclerView.loadMoreComplete();
         recyclerView.setLoadingMoreEnabled(true);
         recyclerView.setPullRefreshEnabled(true);

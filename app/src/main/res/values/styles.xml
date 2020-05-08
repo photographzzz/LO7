@@ -31,4 +31,5 @@
     </style>
 
 
+    <style name="FriendActivityTheme" parent="AppTheme"/>
 </resources>

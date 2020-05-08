@@ -10,28 +10,29 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public interface IStarController {
-    public static IStarController getStarArticleController() {
+    static IStarController getStarArticleController() {
         return StarArticleController.INSTANCE;
     }
 
-    public static IStarController getStarMomentController() {
+    static IStarController getStarMomentController() {
         return StarMomentController.INSTANCE;
     }
 
-    public static IStarController getStarVideoController() {
+    static IStarController getStarVideoController() {
         return StarVideoController.INSTANCE;
     }
 
-    public Observable<Integer> star(Integer visitableId);
+    Observable<Integer> star(Integer visitableId);
 
-    public Observable<Integer> unstar(Integer visitableId);
+    Observable<Integer> unstar(Integer visitableId);
 
     // 判断是否收藏文章，返回收藏与否
-    public Observable<Boolean> hasStar( Integer visitableId);
+    Observable<Boolean> hasStar(Integer visitableId);
 
-    public Observable<Integer> getStarCountOfVisitable(Integer visitableId);
+    Observable<Integer> getStarCountOfVisitable(Integer visitableId);
 
-    public Observable<Integer> getStarCountOfUser(Integer userId);
+    Observable<Integer> getStarCountOfUser(Integer userId);
 
-    public <E extends Visitable> Observable<List<E>> getAllStarVisitableOfUser(Integer userId, Class<E> clazz);
+    <E extends Visitable> Observable<List<E>> getAllStarVisitableOfUser(Integer userId, Class<E> clazz);
+
 }

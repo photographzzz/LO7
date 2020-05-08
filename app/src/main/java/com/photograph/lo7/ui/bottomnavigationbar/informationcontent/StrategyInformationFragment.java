@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.photograph.lo7.R;
 import com.photograph.lo7.databinding.FragmentInformationStrategyBinding;
-import com.photograph.lo7.util.XRecyclerUtils;
+import com.photograph.lo7.util.XRecyclerViewUtils;
 
 public class StrategyInformationFragment extends Fragment implements XRecyclerView.LoadingListener {
     private XRecyclerView recyclerView;
@@ -24,7 +24,7 @@ public class StrategyInformationFragment extends Fragment implements XRecyclerVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentInformationStrategyBinding strategyBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_information_strategy, container, false);
         recyclerView = strategyBinding.strategyArticleRecyclerview;
-        XRecyclerUtils.initXRecyclerUtils(recyclerView,this);
+        XRecyclerViewUtils.initXRecyclerUtils(recyclerView,this);
         recyclerView.setLoadingListener(this);
         onRefresh();
 
@@ -49,12 +49,12 @@ public class StrategyInformationFragment extends Fragment implements XRecyclerVi
     @Override
     public void onRefresh() {
         pageNum = 1;
-        XRecyclerUtils.refresh(recyclerView, pageNum++, this);
+        XRecyclerViewUtils.refreshArticles(recyclerView, pageNum++, this);
     }
 
     @Override
     public void onLoadMore() {
-        XRecyclerUtils.loadMoreArticles(recyclerView, pageNum++, this);
+        XRecyclerViewUtils.loadMoreArticles(recyclerView, pageNum++, this);
         recyclerView.loadMoreComplete();
         recyclerView.setLoadingMoreEnabled(true);
         recyclerView.setPullRefreshEnabled(true);

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_like_article"
+        android:id="@+id/item_like_visitable"
         android:title="点赞"
         android:icon="@drawable/ic_like_border_24dp"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/item_star_article"
+        android:id="@+id/item_star_visitable"
         android:title="收藏"
         android:icon="@drawable/ic_favorite_border_24dp"
         app:showAsAction="always" />

@@ -5,7 +5,9 @@ import androidx.databinding.Bindable;
 
 import com.photograph.lo7.BR;
 
-public class Friend extends BaseObservable {
+import java.io.Serializable;
+
+public class Friend extends BaseObservable implements Serializable {
     private Integer id;
     private String username;
     private Integer gender;
@@ -104,4 +106,6 @@ public class Friend extends BaseObservable {
         this.beFollower = beFollower;
         notifyPropertyChanged(BR.beFollower);
     }
+
+
 }

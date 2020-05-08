@@ -1,6 +1,5 @@
 package com.photograph.lo7.ui.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,25 +16,15 @@ import androidx.fragment.app.Fragment;
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.controller.UserController;
-import com.photograph.lo7.databinding.FragmentLoginBinding;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.ui.activities.HomeActivity;
 import com.photograph.lo7.util.FragmentUtils;
 import com.rxjava.rxlife.RxLife;
 
 public class LoginFragment extends Fragment {
-    FragmentLoginBinding loginBinding;
-    Context context;
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        this.context = context;
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        loginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+        com.photograph.lo7.databinding.FragmentLoginBinding loginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         TextView usernameText = loginBinding.loginEditUsername;
         TextView passwordText = loginBinding.loginEditPassword;
         Button loginBtn = loginBinding.loginBtnLogin;

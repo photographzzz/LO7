@@ -12,35 +12,35 @@ public enum StarArticleController implements IStarController {
     INSTANCE;
     @Override
     public Observable<Integer> star( Integer articleId) {
-        return RxHttp.postForm("sa/star_article")
+        return RxHttp.postForm("sa")
                 .add("articleId", articleId)
                 .asResponse(Integer.class);
     }
 
     @Override
     public Observable<Integer> unstar(Integer articleId) {
-        return RxHttp.postForm("sa/unstar_article")
+        return RxHttp.deleteForm("sa")
                 .add("articleId", articleId)
                 .asResponse(Integer.class);
     }
 
     @Override
     public Observable<Boolean> hasStar(Integer articleId) {
-        return RxHttp.get("sa/has_star_article")
+        return RxHttp.get("sa")
                 .add("articleId", articleId)
                 .asResponse(Boolean.class);
     }
 
     @Override
     public Observable<Integer> getStarCountOfVisitable(Integer articleId) {
-        return RxHttp.get("sa/article_star_count")
+        return RxHttp.get("sa/article_count")
                 .add("articleId", articleId)
                 .asResponse(Integer.class);
     }
 
     @Override
     public Observable<Integer> getStarCountOfUser(Integer userId) {
-        return RxHttp.get("sa/user_star_count")
+        return RxHttp.get("sa/user_count")
                 .add("userId", userId)
                 .asResponse(Integer.class);
     }

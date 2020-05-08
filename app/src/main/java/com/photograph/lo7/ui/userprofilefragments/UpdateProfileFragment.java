@@ -21,15 +21,12 @@ public class UpdateProfileFragment extends Fragment {
         FragmentUpdateProfileBinding updateProfileBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_update_profile, container, false);
         View view = updateProfileBinding.getRoot();
 
-
         updateProfileBinding.updatePicFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updatePicFragment));
         updateProfileBinding.updateUsernameFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updateUsernameFragment));
         updateProfileBinding.updateGenderFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updateGenderFragment));
         updateProfileBinding.updateEmailFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updateEmailFragment));
         updateProfileBinding.updatePhoneFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updatePhoneFragment));
         updateProfileBinding.updateBioFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_updateBioFragment));
-
-        /*updateProfileBinding.setUser(AppHolder.currentUser);*/
 
         return view;
     }

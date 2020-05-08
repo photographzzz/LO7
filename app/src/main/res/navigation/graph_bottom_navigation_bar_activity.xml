@@ -11,15 +11,15 @@
     <fragment
         android:id="@+id/bottomNavigationBarSquareFragment"
         android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarSquareFragment"
-        android:label="BottomNavigationBarBroadcastFragment"/>
+        android:label="BottomNavigationBarSquareFragment"/>
     <fragment
-        android:id="@+id/bottomNavigationBarMallFragment"
-        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarMallFragment"
+        android:id="@+id/bottomNavigationBarGameFragment"
+        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarGameFragment"
         android:label="BottomNavigationBarSettingsFragment"/>
 
     <fragment
-        android:id="@+id/bottomNavigationBarPersonFragment"
-        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarPersonFragment"
+        android:id="@+id/bottomNavigationBarDashboardFragment"
+        android:name="com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarDashboardFragment"
         android:label="BottomNavigationBarSettingsFragment"/>
 
 

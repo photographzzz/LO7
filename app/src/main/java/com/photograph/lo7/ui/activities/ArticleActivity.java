@@ -1,5 +1,6 @@
 package com.photograph.lo7.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,38 +14,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.photograph.lo7.AppHolder;
 import com.photograph.lo7.R;
 import com.photograph.lo7.adapter.CommentAdapter;
-import com.photograph.lo7.adapter.SectionAdapter;
 import com.photograph.lo7.controller.ICommentController;
 import com.photograph.lo7.controller.ILikeController;
 import com.photograph.lo7.controller.IStarController;
-import com.photograph.lo7.controller.SectionController;
+import com.photograph.lo7.controller.UserController;
 import com.photograph.lo7.databinding.ActivityArticleBinding;
 import com.photograph.lo7.entity.Visitable;
 import com.photograph.lo7.httpsender.OnError;
 import com.photograph.lo7.presenter.CommentPresenter;
 import com.photograph.lo7.presenter.FollowerPresenter;
 import com.photograph.lo7.util.LikeUtils;
-import com.photograph.lo7.util.SpaceItemDecoration;
 import com.photograph.lo7.util.StarUtils;
+import com.photograph.lo7.view.SpaceItemDecoration;
 import com.rxjava.rxlife.RxLife;
 
 public class ArticleActivity extends AppCompatActivity  {
     private ActivityArticleBinding articleBinding;
-    private RecyclerView sectionsRecyclerView;
     private RecyclerView commentsRecyclerView;
     private Visitable article = AppHolder.currentArticle;
     private CommentAdapter commentAdapter;
     private IStarController starArticleController = IStarController.getStarArticleController();
     private ILikeController likeArticleController = ILikeController.getLikeArticleController();
-    private SectionController sectionController = SectionController.INSTANCE;
     private ICommentController commentArticleController = ICommentController.getCommentArticleController();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         articleBinding = DataBindingUtil.setContentView(this, R.layout.activity_article);
-        initSections();
         initComments();
 
         setSupportActionBar(articleBinding.articleToolbar.toolbar);
@@ -54,11 +50,6 @@ public class ArticleActivity extends AppCompatActivity  {
 
 
         SpaceItemDecoration spaceItemDecoration = new SpaceItemDecoration(10);
-
-        sectionsRecyclerView = articleBinding.sectionsRecyclerview;
-        sectionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        sectionsRecyclerView.addItemDecoration(spaceItemDecoration);
-
         commentsRecyclerView = articleBinding.commentsRecyclerview;
         commentsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentsRecyclerView.addItemDecoration(spaceItemDecoration);
@@ -67,16 +58,15 @@ public class ArticleActivity extends AppCompatActivity  {
         CommentPresenter commentPresenter = new ArticleCommentPresenter();
         articleBinding.setCommentPresenter(commentPresenter);
 
-    }
-
-    private void initSections() {
-        sectionController.getAllSection(article.getId())
-                .as(RxLife.asOnMain(this))
-                .subscribe(sections -> {
-                    sectionsRecyclerView.setAdapter(new SectionAdapter(this, sections));
-                }, (OnError) error -> {
-                    error.show(error.getErrorMsg());
-                });
+        articleBinding.articleHeadView.friendPicCirimg.setOnClickListener(v -> {
+            UserController.INSTANCE.getFriendProfile(article.getAuthorId())
+                    .as(RxLife.asOnMain(this))
+                    .subscribe(friend -> {
+                        Intent intent = new Intent(this, FriendActivity.class);
+                        intent.putExtra("friend", friend);
+                        startActivity(intent);
+                    }, (OnError) error -> error.show(error.getErrorMsg()));
+        });
     }
 
     private void initComments() {
@@ -92,7 +82,7 @@ public class ArticleActivity extends AppCompatActivity  {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.tool_menu_article, menu);
+        getMenuInflater().inflate(R.menu.tool_menu_visitable, menu);
         MenuItem likeItem = menu.getItem(0);
         likeItem.setIcon(article.getHasLike() ? R.drawable.ic_like_24dp : R.drawable.ic_like_border_24dp);
         MenuItem starItem = menu.getItem(1);
@@ -107,10 +97,10 @@ public class ArticleActivity extends AppCompatActivity  {
                 article = null;
                 finish();
                 break;
-            case R.id.item_like_article:
+            case R.id.item_like_visitable:
                 LikeUtils.handle(likeArticleController, article, item, articleBinding.getRoot());
                 break;
-            case R.id.item_star_article:
+            case R.id.item_star_visitable:
                 StarUtils.handle(starArticleController, article, item, articleBinding.getRoot());
                 break;
             default:
@@ -130,7 +120,7 @@ public class ArticleActivity extends AppCompatActivity  {
     public class ArticleCommentPresenter extends CommentPresenter{
         @Override
         public void onClickComment() {
-            super.onClickComment(article.getId(),commentAdapter,articleBinding.getRoot());
+            super.onClickComment(article.getId(),commentArticleController,commentAdapter,articleBinding.getRoot());
         }
     }
 }

@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import com.photograph.lo7.R;
 
-public class BottomNavigationBarMallFragment extends Fragment {
+public class BottomNavigationBarDashboardFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mall, container, false);
+        return inflater.inflate(R.layout.fragment_person, container, false);
+
     }
 }
+

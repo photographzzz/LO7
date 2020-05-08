@@ -1,6 +1,8 @@
 package com.photograph.lo7.controller;
 
 import com.photograph.lo7.controller.impl.CommentArticleController;
+import com.photograph.lo7.controller.impl.CommentMomentController;
+import com.photograph.lo7.controller.impl.CommentVideoController;
 import com.photograph.lo7.entity.Comment;
 
 import java.util.List;
@@ -12,7 +14,15 @@ public interface ICommentController {
         return CommentArticleController.INSTANCE;
     }
 
-    public Observable<List<Comment>> getCommentsByVisitableId(Integer visitableId);
+    public static CommentMomentController getCommentMomentController(){
+        return CommentMomentController.INSTANCE;
+    }
 
-    public Observable<Comment> commentVisitable(Integer visitableId,Integer userId,String content);
+    public static CommentVideoController getCommentVideoController(){
+        return CommentVideoController.INSTANCE;
+    }
+
+    Observable<List<Comment>> getCommentsByVisitableId(Integer visitableId);
+
+    Observable<Comment> commentVisitable(Integer visitableId, Integer userId, String content);
 }

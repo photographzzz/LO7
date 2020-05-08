@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.photograph.lo7.AppHolder" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="followerPresenter"
+            type="com.photograph.lo7.presenter.FollowerPresenter" />
+
+
+        <variable
+            name="commentPresenter"
+            type="com.photograph.lo7.presenter.CommentPresenter" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/video_toolbar"
+            layout="@layout/toolbar_layout" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/video_nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/video_head_view"
+                        layout="@layout/my_visitable_head_view"
+                        bind:followerPresenter="@{followerPresenter}"
+                        bind:visitable="@{AppHolder.currentVideo}" />
+
+                    <WebView
+                        android:id="@+id/video_web_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        bind:visitableSrc="@{AppHolder.currentVideo.src}" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comments_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    bind:commentHint="@{AppHolder.currentVideo.commentCount}" />
+
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/video_comment_floating_btn"
+            layout="@layout/my_comment_floating_btn"
+            bind:commentPresenter="@{commentPresenter}" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

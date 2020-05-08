@@ -11,11 +11,15 @@
     <string name="hint_register">注 册</string>
     <string name="hint_login2">登 陆</string>
     <string name="hint_register2">没有账号？现在注册</string>
-    <string name="mall">商城</string>
+    <string name="game">约战</string>
     <string name="square">广场</string>
     <string name="information">资讯</string>
     <string name="hint_bio">签名</string>
     <string name="affirm_update">确定修改</string>
     <string name="male">男</string>
     <string name="female">女</string>
+    <string name="dashboard">工具箱</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

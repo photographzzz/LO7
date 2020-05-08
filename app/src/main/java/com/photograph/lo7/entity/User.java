@@ -1,20 +1,11 @@
 package com.photograph.lo7.entity;
 
 
-import android.net.Uri;
-import android.widget.ImageView;
-
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.Observable;
 
-import com.bumptech.glide.Glide;
 import com.photograph.lo7.BR;
-import com.photograph.lo7.R;
-import com.photograph.lo7.httpsender.Url;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class User extends BaseObservable {
     private Integer id;
@@ -85,6 +76,7 @@ public class User extends BaseObservable {
 
     public void setPic(String pic) {
         this.pic = pic;
+        notifyPropertyChanged(BR.pic);
     }
 
     @Bindable

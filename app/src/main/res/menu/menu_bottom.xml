@@ -12,13 +12,13 @@
             android:title="@string/square" />
 
         <item
-            android:id="@+id/bottomNavigationBarMallFragment"
-            android:icon="@drawable/ic_mall"
-            android:title="@string/mall" />
+            android:id="@+id/bottomNavigationBarGameFragment"
+            android:icon="@drawable/ic_game"
+            android:title="@string/game" />
 
         <item
-            android:id="@+id/bottomNavigationBarPersonFragment"
-            android:icon="@mipmap/ic_launcher"
-            android:title="个人" />
+            android:id="@+id/bottomNavigationBarDashboardFragment"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/dashboard" />
     </group>
 </menu>

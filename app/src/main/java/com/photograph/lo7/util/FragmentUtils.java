@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.photograph.lo7.ui.fragments.LoginFragment;
 import com.photograph.lo7.ui.fragments.RegisterFragment;
 import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarInformationFragment;
-import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarMallFragment;
-import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarPersonFragment;
+import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarGameFragment;
+import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarDashboardFragment;
 import com.photograph.lo7.ui.bottomnavigationbar.BottomNavigationBarSquareFragment;
 
 public class FragmentUtils {
@@ -46,9 +46,9 @@ public class FragmentUtils {
             } else if (fragmentTag.equals(SQUARE_FRAGMENT_TAG)) {
                 fragment = new BottomNavigationBarSquareFragment();
             } else if (fragmentTag.equals(MALL_FRAGMENT_TAG)) {
-                fragment = new BottomNavigationBarMallFragment();
+                fragment = new BottomNavigationBarGameFragment();
             } else if (fragmentTag.equals(PERSON_FRAGMENT_TAG)) {
-                fragment = new BottomNavigationBarPersonFragment();
+                fragment = new BottomNavigationBarDashboardFragment();
             }
 
         }

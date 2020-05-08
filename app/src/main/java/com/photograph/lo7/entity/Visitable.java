@@ -5,12 +5,16 @@ import androidx.databinding.Bindable;
 
 import com.photograph.lo7.BR;
 
-public class Visitable extends BaseObservable {
+import java.io.Serializable;
+
+public class Visitable extends BaseObservable implements Serializable {
     private Integer id;
 
     private Integer authorId;
 
     private String title;
+
+    private String src;
 
     private Integer visitCount;
 
@@ -184,5 +188,14 @@ public class Visitable extends BaseObservable {
     public void setAuthorHasBeenFollowed(Boolean authorHasBeenFollowed) {
         this.authorHasBeenFollowed = authorHasBeenFollowed;
         notifyPropertyChanged(BR.authorHasBeenFollowed);
+    }
+
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
     }
 }

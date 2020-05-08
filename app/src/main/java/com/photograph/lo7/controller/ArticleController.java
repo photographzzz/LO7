@@ -23,6 +23,12 @@ public enum ArticleController {
                 .asResponse(Article.class);
     }
 
+    public Observable<List<Article>> getArticlesByAuthorId(Integer pageNum) {
+        return RxHttp.get("/article/author_id")
+                .add("pageNum",pageNum)
+                .asResponseList(Article.class);
+    }
+
     public Observable<List<Article>> getVersionArticles() {
         return getArticlesByType(ArticleConst.VERSION);
     }
@@ -46,4 +52,5 @@ public enum ArticleController {
                 .add("articleId", articleId)
                 .asString();
     }
+
 }

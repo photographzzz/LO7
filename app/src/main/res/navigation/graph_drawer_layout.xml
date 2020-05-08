@@ -31,12 +31,8 @@
         tools:layout="@layout/fragment_star" />
 
     <fragment
-        android:id="@+id/drawerLayoutDownloadFragment"
-        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutDownloadFragment"
-        tools:layout="@layout/fragment_download" />
+        android:id="@+id/drawerLayoutRoomFragment"
+        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutRoomFragment"
+        tools:layout="@layout/fragment_drawer_game" />
 
-    <fragment
-        android:id="@+id/drawerLayoutSettingsFragment"
-        android:name="com.photograph.lo7.ui.drawerlayout.DrawerLayoutSettingsFragment"
-        tools:layout="@layout/fragment_settings" />
 </navigation>
